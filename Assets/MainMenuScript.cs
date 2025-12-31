@@ -6,17 +6,28 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
     public AudioSource BGAudio;
-    public float GameDelayDuration = 2f;
+    public float GameDelayDuration = 5f;
+
+    private void Start()
+    {
+        if (BGAudio != null) BGAudio.Play();
+
+        // Safety reset (prevents “stuck” when coming from paused gameplay)
+        Time.timeScale = 1f;
+        PauseMenuScript.GameIsPaused = false;
+    }
+
     public void PlayGame()
     {
         StartCoroutine(LoadGameDelay());
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
 
     private IEnumerator LoadGameDelay()
     {
         yield return new WaitForSeconds(GameDelayDuration);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 
     public void QuitGame()
@@ -26,8 +37,4 @@ public class MainMenuScript : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        BGAudio.Play();
-    }
 }
