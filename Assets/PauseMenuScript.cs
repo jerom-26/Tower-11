@@ -30,14 +30,14 @@ public class PauseMenuScript : MonoBehaviour
     {
         PauseMenuUI.SetActive(false);
         GameIsPaused = false;
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
 
     public void Pause()
     {
         PauseMenuUI.SetActive(true);
         GameIsPaused = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
 
     }
 
@@ -49,7 +49,10 @@ public class PauseMenuScript : MonoBehaviour
 
     public void Menu()
     {
-        Time.timeScale = 0;
+        PauseMenuUI.SetActive(false );
+        GameIsPaused=false;
+        Time.timeScale = 1f;
+
         SceneManager.LoadScene("Menu UI");
 
     }

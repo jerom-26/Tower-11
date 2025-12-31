@@ -8,7 +8,9 @@ public class rocketSpawnScript : MonoBehaviour
     public gameLogicScript gameLogic;
     public float rocketSpawnRate = 2f;
     private float timer = 0f;
-    private bool canSpawnRockets = true;
+
+    public float delay = 3f;
+    private bool canSpawnRockets = false;   // start OFF
 
     public Transform player; // assign airplane in inspector
     public AudioSource spawnSound;
@@ -16,7 +18,13 @@ public class rocketSpawnScript : MonoBehaviour
     void Start()
     {
         gameLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<gameLogicScript>();
-        SpawnRocket(); // spawn one at start
+        Invoke(nameof(EnableSpawning), delay); // enable later (not spawn)
+    }
+
+    void EnableSpawning()
+    {
+        canSpawnRockets = true;
+        timer = 0f;
     }
 
     void Update()
@@ -34,16 +42,14 @@ public class rocketSpawnScript : MonoBehaviour
             if (player != null && player.position.y > 3f)
                 shouldFire = true;
 
-            //Condition 2: Random chance
+            // Condition 2: Random chance
             if (Random.value < 0.25f)
                 shouldFire = true;
 
             if (shouldFire)
-            {
                 SpawnRocket();
-            }
 
-            timer = 0;
+            timer = 0f;
         }
     }
 
@@ -52,9 +58,7 @@ public class rocketSpawnScript : MonoBehaviour
         Instantiate(rocketLauncherPrefab, transform.position, Quaternion.identity);
 
         if (spawnSound != null)
-        {
             spawnSound.Play();
-        }
     }
 
     public void StopRocketSpawning()
