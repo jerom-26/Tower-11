@@ -6,29 +6,42 @@ public class towerSpawnScript : MonoBehaviour
 {
     public GameObject towerPrefab;
     public float spawnRate = 2f;
-    private float timer;
-    public bool collisionSpawnStop = true; // true = allow spawning
+
+    private float timer = 0f;
+    public bool collisionSpawnStop = true;
+
+    public float delay = 2f;
+    private bool canSpawnTowers = false;
 
     void Start()
     {
-        Spawntower();
+        canSpawnTowers = false;
+        timer = 0f;
+
+        Invoke(nameof(EnableTowerSpawning), delay);
+    }
+
+    void EnableTowerSpawning()
+    {
+        canSpawnTowers = true;
+        timer = 0f;
     }
 
     void Update()
     {
+        if (!canSpawnTowers) return;
         if (!collisionSpawnStop) // stop spawning if false
             return;
 
-        if (timer < spawnRate)
-        {
-            timer += Time.deltaTime;
-        }
-        else
+        timer += Time.deltaTime;
+
+        if (timer >= spawnRate)
         {
             Spawntower();
-            timer = 0;
+            timer = 0f;
         }
     }
+
 
     void Spawntower()
     {
