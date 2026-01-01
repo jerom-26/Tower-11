@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class towerSpawnScript : MonoBehaviour
 {
-    public GameObject towerPrefab;
-    public float spawnRate = 2f;
-
-    private float timer = 0f;
     public bool collisionSpawnStop = true;
 
-    public float delay = 2f;
+    [Header("Pooling")]
+    [SerializeField] private ObjectPool towerPool;
+
+    [Header("Spawn Timing")]
+    [SerializeField] private float spawnRate = 2f;
+    [SerializeField] private float delay = 2f;
+
+    private float timer = 0f;
     private bool canSpawnTowers = false;
 
     void Start()
     {
-        canSpawnTowers = false;
         timer = 0f;
+        canSpawnTowers = false;
 
+        // delay prevents heavy spawn burst right at game start
         Invoke(nameof(EnableTowerSpawning), delay);
     }
 
@@ -30,6 +34,7 @@ public class towerSpawnScript : MonoBehaviour
     void Update()
     {
         if (!canSpawnTowers) return;
+
         if (!collisionSpawnStop) // stop spawning if false
             return;
 
@@ -45,15 +50,16 @@ public class towerSpawnScript : MonoBehaviour
 
     void Spawntower()
     {
-        GameObject newTower = Instantiate(towerPrefab, transform.position, transform.rotation);
+        var obj = towerPool.Get(transform.position, transform.rotation);
+        if (obj == null) return;
 
-        // Pick random scale in Y
-        float randomHeight = Random.Range(.8f , 1f); // values
-        newTower.transform.localScale = new Vector3(
-            newTower.transform.localScale.x,
-            randomHeight,
-            newTower.transform.localScale.z
-        );
+        // Link object -> pool once, so it can return itself later
+        var pooled = obj.GetComponent<PooledObject>();
+        if (pooled != null) pooled.SetPool(towerPool);
+
+        //Reset / randomize tower state each time its reused
+        var tower = obj.GetComponent<TowerBehaviour>();
+        if (tower != null) tower.OnSpawned();
     }
 
     // Call this when game is over

@@ -9789,13 +9789,12 @@ MonoBehaviour:
   player: {fileID: 8664685419424086220, guid: e5a964c169237f34b9dc5842d8fa033c, type: 3}
   speed: 5
   predictionTime: 0.5
+  lifeTime: 3
   scoreOfGame: {fileID: 0}
-  rocketRigid: {fileID: 4384113379613149158}
-  rocketVelocity: 6.23
-  rocketDeadZone: -10
-  explosionEffect: {fileID: 7414087025811431191, guid: d51feac68bcfdd34ebb6fabd7ade9f00, type: 3}
   rocketSound: {fileID: 6354791167472381954}
+  explosionEffect: {fileID: 100000, guid: cf334c2fa68e8414087d035e6c17bec3, type: 3}
   rocketCollisionMove: 1
+  currentState: 0
 --- !u!61 &6967547417985689525
 BoxCollider2D:
   m_ObjectHideFlags: 0
