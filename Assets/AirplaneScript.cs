@@ -10,6 +10,9 @@ public class AirplaneScript : MonoBehaviour
     public float noFlyZoneUpper = 8f;
     public float noFlyZoneLower = -5.7f;
 
+    [Header("Bounds")]
+    public float boundsPadding = 0.15f;
+
     [Header("Tilt Settings")]
     public float tiltMultiplier = 6f;     // how fast angle reacts to velocity
     public float maxUpAngle = 30f;        // degrees
@@ -41,7 +44,6 @@ public class AirplaneScript : MonoBehaviour
     {
         if (!planeAlive) return;
 
-        // -------- Before Game Starts ----------
         if (!gameStarted)
         {
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
@@ -53,22 +55,31 @@ public class AirplaneScript : MonoBehaviour
             return;
         }
 
-        // -------- After Game Starts ----------
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             Flap();
-        }
-
-        // Kill if out of bounds
-        if (transform.position.y > noFlyZoneUpper || transform.position.y < noFlyZoneLower)
-        {
-            Die();
         }
 
         // Apply tilt based on current vertical speed
         ApplyTilt();
     }
 
+    void LateUpdate()
+    {
+        if (!planeAlive) return;
+        if (!gameStarted) return;
+
+        ClampToBounds();
+    }
+
+    void ClampToBounds()
+    {
+        Vector3 pos = transform.position;
+        float minY = noFlyZoneLower + boundsPadding;
+        float maxY = noFlyZoneUpper - boundsPadding;
+        pos.y = Mathf.Clamp(pos.y, minY, maxY);
+        transform.position = pos;
+    }
 
     void Flap()
     {
