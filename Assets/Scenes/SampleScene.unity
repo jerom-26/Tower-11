@@ -969,6 +969,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &437453702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437453704}
+  - component: {fileID: 437453703}
+  m_Layer: 0
+  m_Name: ExplosionPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &437453703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437453702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300ff4b24531b224cab3daec30e91486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: cf334c2fa68e8414087d035e6c17bec3, type: 3}
+  initialSize: 10
+  canExpand: 1
+--- !u!4 &437453704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437453702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.740465, y: -43.143143, z: 234.02682}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495375302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,6 +1576,7 @@ MonoBehaviour:
   planeVelocity: 6
   noFlyZoneUpper: 5.7
   noFlyZoneLower: -20.87
+  boundsPadding: 0.15
   tiltMultiplier: 4
   maxUpAngle: 30
   maxDownAngle: -60
@@ -2057,6 +2105,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &844275206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 844275208}
+  - component: {fileID: 844275207}
+  m_Layer: 0
+  m_Name: TowerPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &844275207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844275206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300ff4b24531b224cab3daec30e91486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2356361242594746617, guid: ec5712b40ef510342b21fe218596c4ca, type: 3}
+  initialSize: 15
+  canExpand: 1
+--- !u!4 &844275208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844275206}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.740465, y: -43.143143, z: 234.02682}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &872640192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2404,9 +2499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae45e127c0446242a111a496bd24cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 2356361242594746617, guid: ec5712b40ef510342b21fe218596c4ca, type: 3}
-  spawnRate: 2.14
   collisionSpawnStop: 1
+  towerPool: {fileID: 844275207}
+  spawnRate: 2.14
+  delay: 2
 --- !u!4 &999337740
 Transform:
   m_ObjectHideFlags: 0
@@ -3186,7 +3282,7 @@ MonoBehaviour:
   playerScore: 0
   scoreUiText: {fileID: 784777905}
   gameOver: {fileID: 2099134894}
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 100000, guid: cf334c2fa68e8414087d035e6c17bec3, type: 3}
   rocketLauncherPrefab: {fileID: 8175754530171615911, guid: e177032f9d0df5d4c8e9c5e51e5ad63b, type: 3}
   rocketLauncher: 0
   rocketSpawnPosition: {fileID: 0}
@@ -5412,3 +5508,5 @@ SceneRoots:
   - {fileID: 1497045437}
   - {fileID: 1342075295}
   - {fileID: 1180087756}
+  - {fileID: 844275208}
+  - {fileID: 437453704}
