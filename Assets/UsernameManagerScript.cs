@@ -5,18 +5,19 @@ public class UsernameManager : MonoBehaviour
 {
     [Header("References")]
     public TMP_InputField usernameInput;
-    public GameObject usernamePanel;      // assign this specific panel
-    public GameObject gameOverPanel;      // optional
-    public GameObject leaderboardPanel;   // optional
-
+    public GameObject usernamePanel;       
+    public GameObject gameOverPanel;      
+    public GameObject leaderboardPanel;   
+    public TMP_Text usernameText;
     void Awake()
     {
         if (usernamePanel == null)
             Debug.LogError("UsernamePanel is not assigned in Inspector.");
         if (usernameInput == null)
             Debug.LogError("UsernameInput is not assigned in Inspector.");
+        if (usernameText == null)
+            Debug.LogWarning("UsernameText is not assigned (Home name won't show).");
     }
-
 
     void Start()
     {
@@ -26,21 +27,25 @@ public class UsernameManager : MonoBehaviour
             enabled = false;
             return;
         }
+        Debug.Log("UsernameText instance ID: " + usernameText.GetInstanceID());
+
 
         if (leaderboardPanel != null)
             leaderboardPanel.SetActive(false);
 
-        // Game Over should be hidden at the beginning too
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
+        string saved = PlayerPrefs.GetString("username", "").Trim();
 
-        // If username is already saved
-        if (PlayerPrefs.HasKey("username"))
+        if (!string.IsNullOrEmpty(saved))
         {
             usernamePanel.SetActive(false);
             Time.timeScale = 1f;
-            Debug.Log("Welcome back, " + PlayerPrefs.GetString("username"));
+            Debug.Log("Welcome back, " + saved);
+
+            if (usernameText != null)
+                usernameText.text = saved;
         }
         else
         {
@@ -90,6 +95,7 @@ public class UsernameManager : MonoBehaviour
 
         // Save locally
         PlayerPrefs.SetString("username", lowercaseUsername);
+        usernameText.text = lowercaseUsername;
         PlayerPrefs.Save();
        
         Debug.Log("✅ Username saved: " + lowercaseUsername);
