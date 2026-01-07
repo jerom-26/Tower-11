@@ -9,6 +9,11 @@ public class ScrollerScript : MonoBehaviour
     public float baseSpeed = 19f;
     public float multiplier = 0.05f;
 
+    [Header("Difficulty Scaling")]
+    public bool useDifficultyScaling = true;
+    public float maxSpeedMultiplier = 1.25f;
+    public int startScalingScore = 0;
+
     [Header("BG Img")]
     public Transform sky;
     public Transform skyDuplicate;
@@ -18,10 +23,16 @@ public class ScrollerScript : MonoBehaviour
 
     private float tileWidth;
     private Camera cam;
+    private gameLogicScript gameLogic;
+
 
     void Awake()
     {
         cam = Camera.main;
+
+        GameObject logicObj = GameObject.FindGameObjectWithTag("Logic");
+        if (logicObj != null)
+            gameLogic = logicObj.GetComponent<gameLogicScript>();
 
         if (sky == null || skyDuplicate == null)
         {
@@ -40,18 +51,34 @@ public class ScrollerScript : MonoBehaviour
         if (tileWidth <= 0.0001f)
         {
             enabled = false;
+            return;
         }
     }
 
     void Update()
     {
-        float speed = baseSpeed * multiplier;
-        Vector3 delta = Vector3.left * speed * Time.deltaTime;
+
+        float finalSpeed = baseSpeed;
+
+        // score-based extra speed
+        if (gameLogic != null)
+            finalSpeed += multiplier * gameLogic.playerScore;
+
+        // Difficulty-based scaling
+        if (useDifficultyScaling && gameLogic != null && gameLogic.playerScore >= startScalingScore)
+        {
+            float d = gameLogic.GetDifficulty01(); // 0..1
+            float speedScale = Mathf.Lerp(1f, maxSpeedMultiplier, d);
+            finalSpeed *= speedScale;
+        }
+
+        Vector3 delta = Vector3.left * finalSpeed * Time.deltaTime;
 
         sky.position += delta;
         skyDuplicate.position += delta;
 
         float camLeftX = GetCameraLeftX();
+
         if (GetTileRightEdge(sky) < camLeftX - buffer)
         {
             sky.position = new Vector3(skyDuplicate.position.x + tileWidth, sky.position.y, sky.position.z);
@@ -73,4 +100,14 @@ public class ScrollerScript : MonoBehaviour
     {
         return t.position.x + tileWidth * 0.5f;
     }
+
+    void LoopIfNeeded(Transform a, Transform b)
+    {
+        // when sprite a goes off screen, move it to the right of sprite b
+        if (a.position.x <= b.position.x - tileWidth + buffer)
+        {
+            a.position = new Vector3(b.position.x + tileWidth - buffer, a.position.y, a.position.z);
+        }
+    }
+
 }

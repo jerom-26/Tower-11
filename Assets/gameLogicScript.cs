@@ -20,6 +20,15 @@ public class gameLogicScript : MonoBehaviour
 
     public LeaderboardManager leaderboardManager;
 
+    [Header("Difficulty")]
+    public int maxDifficultyScore = 50;
+
+    public float GetDifficulty01()
+    {
+        if (maxDifficultyScore <= 0) return 0f;
+        return Mathf.Clamp01((float)playerScore / maxDifficultyScore);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,11 +73,11 @@ public class gameLogicScript : MonoBehaviour
         gameOver.SetActive(true);
 
         // stop spawners
-        towerSpawnScript towerSpawner = FindObjectOfType<towerSpawnScript>();
+        towerSpawnScript towerSpawner = FindFirstObjectByType<towerSpawnScript>();
         if (towerSpawner != null)
             towerSpawner.StopCollisionSpawning();
 
-        rocketSpawnScript rocketSpawner = FindObjectOfType<rocketSpawnScript>();
+        rocketSpawnScript rocketSpawner = FindFirstObjectByType<rocketSpawnScript>();
         if (rocketSpawner != null)
             rocketSpawner.StopRocketSpawning();
 

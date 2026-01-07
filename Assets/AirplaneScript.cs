@@ -84,14 +84,14 @@ public class AirplaneScript : MonoBehaviour
     void Flap()
     {
         // reset vertical speed then push up -> snappy control
-        myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, 0f);
-        myRigidBody.velocity += Vector2.up * planeVelocity;
+        myRigidBody.linearVelocity = new Vector2(myRigidBody.linearVelocity.x, 0f);
+        myRigidBody.linearVelocity += Vector2.up * planeVelocity;
     }
 
     void ApplyTilt()
     {
         // Convert vertical velocity into an angle
-        float targetAngle = myRigidBody.velocity.y * tiltMultiplier;
+        float targetAngle = myRigidBody.linearVelocity.y * tiltMultiplier;
 
         // Clamp so it never goes crazy
         targetAngle = Mathf.Clamp(targetAngle, maxDownAngle, maxUpAngle);

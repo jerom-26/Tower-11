@@ -27,7 +27,6 @@ public class UsernameManager : MonoBehaviour
             enabled = false;
             return;
         }
-        Debug.Log("UsernameText instance ID: " + usernameText.GetInstanceID());
 
 
         if (leaderboardPanel != null)
