@@ -26,7 +26,7 @@ public class RocketMovement : MonoBehaviour
         if (player != null)
         {
             Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
-            Vector2 futurePos = (Vector2)player.position + playerRb.velocity * predictionTime;
+            Vector2 futurePos = (Vector2)player.position + playerRb.linearVelocity * predictionTime;
             moveDirection = (futurePos - (Vector2)transform.position).normalized;
 
             // Randomize rocket type
@@ -96,7 +96,7 @@ public class RocketMovement : MonoBehaviour
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
             }
 
-            // Play sound (detach so it isn’t cut off when rocket is destroyed)
+            // Play sound (detach so it isnï¿½t cut off when rocket is destroyed)
             if (rocketSound != null)
             {
                 rocketSound.transform.parent = null;
@@ -120,7 +120,7 @@ public class RocketMovement : MonoBehaviour
 
     void StopRocketSpawning()
     {
-        rocketSpawnScript rocketSpawner = GameObject.FindObjectOfType<rocketSpawnScript>();
+        rocketSpawnScript rocketSpawner = FindFirstObjectByType<rocketSpawnScript>();
         if (rocketSpawner != null)
         {
             rocketSpawner.StopRocketSpawning();

@@ -10,14 +10,20 @@ public class towerSpawnScript : MonoBehaviour
     [SerializeField] private ObjectPool towerPool;
 
     [Header("Spawn Timing")]
-    [SerializeField] private float spawnRate = 2f;
     [SerializeField] private float delay = 2f;
 
     private float timer = 0f;
     private bool canSpawnTowers = false;
 
+    [Header("Difficulty Scaling")]
+    [SerializeField] private float easySpawnRate = 2f;
+    [SerializeField] private float hardSpawnRate = 0.9f;
+
+    private gameLogicScript gameLogic;
     void Start()
     {
+        gameLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<gameLogicScript>();
+
         timer = 0f;
         canSpawnTowers = false;
 
@@ -40,11 +46,18 @@ public class towerSpawnScript : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer >= spawnRate)
+        float difficulty01 = 0f;
+        if (gameLogic != null)
+            difficulty01 = gameLogic.GetDifficulty01();
+
+        float currentSpawnRate = Mathf.Lerp(easySpawnRate, hardSpawnRate, difficulty01);
+
+        if (timer >= currentSpawnRate)
         {
             Spawntower();
             timer = 0f;
         }
+
     }
 
 
