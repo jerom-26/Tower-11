@@ -2,7 +2,8 @@
 
 Tower 11 is a fast-paced 2D arcade survival game built with Unity.
 Control a plane flying through a scrolling cityscape, dodge deadly towers and unpredictable rockets, and survive as long as possible to climb the global leaderboard.
-
+<img width="852" height="472" alt="image" src="https://github.com/user-attachments/assets/44c43626-3f02-47cf-bdee-6d6453ef647f" />
+<img width="1601" height="904" alt="image" src="https://github.com/user-attachments/assets/a0167784-5baa-4d5b-93a0-8ae717a53841" />
 🕹️ Gameplay Preview
 
 Simple to play. Hard to master.
@@ -109,6 +110,5 @@ Sound & visual polish
 👤 Developer
 
 Built as an indie project using Unity + C#, focused on clean mechanics, performance, and scalable systems
-<img width="852" height="472" alt="image" src="https://github.com/user-attachments/assets/44c43626-3f02-47cf-bdee-6d6453ef647f" />
-<img width="1601" height="904" alt="image" src="https://github.com/user-attachments/assets/a0167784-5baa-4d5b-93a0-8ae717a53841" />
+
 
