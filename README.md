@@ -1,65 +1,111 @@
-Tower 11
+🎮 Tower 11
 
-Tower 11 is a 2D arcade-style survival game developed in Unity. Players control a plane navigating a scrolling cityscape, avoiding towers and homing missiles to achieve the highest score possible. High scores persist locally and sync to an online leaderboard via Supabase.
+Tower 11 is a fast-paced 2D arcade survival game built with Unity.
+Control a plane flying through a scrolling cityscape, dodge deadly towers and unpredictable rockets, and survive as long as possible to climb the global leaderboard.
 
+🕹️ Gameplay Preview
 
-🕹️ Gameplay Overview
-Control a plane flying through a scrolling city environment.
-Avoid towers and guided missiles to stay alive.
+Simple to play. Hard to master.
 
-Score increases over time — collisions end the run instantly.
+Fly continuously through a dynamic city
 
-High scores are saved both locally and online.
+Avoid towers and guided rockets
+
+One mistake = instant game over
+
+Difficulty increases the longer you survive
+
+🎯 Core Gameplay
+
+Tap / Click / Space → Fly up
+
+Release → Fall down
+
+ESC → Pause menu
+
+Scoring
+
+Pass towers to increase score
+
+Higher score = higher difficulty
+
+New personal bests are saved automatically
+
+🚀 Rocket Types
+
+All rockets share the same visual design — their behavior is what makes them dangerous 👀
+
+🎯 Chase — Follows the player
+
+⏳ Charge — Waits, then attacks
+
+➡️ Decoy — Flies straight
+
+🟢 Dummy — Harmless (does not kill)
 
 ✨ Features
-Responsive and simple 2D gameplay.
 
-Game Over screen with instant replay option.
+Smooth and responsive 2D controls
 
-Username system with local validation and storage.
+Dynamic difficulty scaling
 
-Online leaderboard powered by Supabase.
+Parallax scrolling background
 
-Persistent high scores using Unity’s PlayerPrefs.
+Pause menu with How To Play guide
+
+Local username system with validation
+
+Persistent high scores
+
+Online leaderboard integration
+
+🌐 Online Leaderboard (Supabase)
+
+Players register a username once
+
+Scores sync only when a new personal best is reached
+
+Global leaderboard fetched in real time
+
+Username rules
+
+Lowercase only (a–z)
+
+Numbers allowed (0–9)
+
+Underscore allowed (_)
+
+Length limits enforced
 
 🛠️ Technical Details
+Category	Tech
+Engine	Unity (2D)
+Language	C#
+Backend	Supabase (REST API)
+Platforms	WebGL / Desktop
+Version Control	Git & GitHub
+📂 Project Highlights
 
-Engine: Unity (2D)
+Object pooling for performance
 
-Language: C#
+Score-based difficulty scaling
 
-Backend: Supabase (REST API)
+Modular UI (Pause, Game Over, How To Play)
 
-Platform Target: WebGL / Desktop
+Clean separation of game logic & UI logic
 
-Version Control: Git & GitHub
+🚧 Future Improvements
 
-🌐 Leaderboard System
+New environments & themes
 
-Players register a username once (validated locally).
+Additional hazards and enemy behaviors
 
-Scores update only when a new personal best is achieved.
-
-Fetches and displays the global top scores in real time.
-
-Username validation rules:
-
-All lowercase letters
-
-Length within defined limits
-
-Allowed characters: a–z, 0–9, _
-
-🎮 Controls
-Tap / Space Bar — Move the plane
-
-Esc — Open menu or pause
-
-Play Again — Restart instantly
-
-🚧 Future Ideas
-New environments and hazards
-
-Power-ups for temporary invincibility
+Power-ups (slow time, shields, invincibility)
 
 Mobile-friendly touch controls
+
+Sound & visual polish
+
+👤 Developer
+
+Built as an indie project using Unity + C#, focused on clean mechanics, performance, and scalable systems
