@@ -2158,7 +2158,7 @@ MonoBehaviour:
   myRigidBody: {fileID: 667863070}
   planeVelocity: 6
   noFlyZoneUpper: 5.7
-  noFlyZoneLower: -20.87
+  noFlyZoneLower: -6
   boundsPadding: 0.15
   tiltMultiplier: 4
   maxUpAngle: 30
