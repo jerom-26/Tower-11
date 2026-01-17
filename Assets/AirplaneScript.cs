@@ -8,7 +8,7 @@ public class AirplaneScript : MonoBehaviour
     public Rigidbody2D myRigidBody;
     public float planeVelocity = 7.5f;
     public float noFlyZoneUpper = 8f;
-    public float noFlyZoneLower = -5.7f;
+    public float noFlyZoneLower = -4f;
 
     [Header("Bounds")]
     public float boundsPadding = 0.15f;
@@ -75,11 +75,23 @@ public class AirplaneScript : MonoBehaviour
     void ClampToBounds()
     {
         Vector3 pos = transform.position;
-        float minY = noFlyZoneLower + boundsPadding;
+
         float maxY = noFlyZoneUpper - boundsPadding;
-        pos.y = Mathf.Clamp(pos.y, minY, maxY);
-        transform.position = pos;
+
+        // Clamp only the TOP
+        if (pos.y > maxY)
+        {
+            pos.y = maxY;
+            transform.position = pos;
+        }
+
+        // BOTTOM = death
+        if (pos.y < noFlyZoneLower)
+        {
+            Die();
+        }
     }
+
 
     void Flap()
     {
