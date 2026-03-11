@@ -15,22 +15,26 @@ public class NFTChecker : MonoBehaviour
     {
         try
         {
+            Debug.Log("Checking NFT for: " + walletAddress);
+
             var contract = await ThirdwebManager.Instance.GetContract(
-                address: contractAddress,
-                chainId: chainId
+                contractAddress,
+                chainId
             );
 
-            BigInteger balance = await contract.Read<BigInteger>(
+            var balance = await contract.Read<System.Numerics.BigInteger>(
                 "balanceOf",
-                walletAddress
+                new object[] { walletAddress }
             );
+
+            Debug.Log("NFT Balance: " + balance);
 
             hasPremiumPlane = balance > 0;
 
             if (hasPremiumPlane)
-                Debug.Log("Premium Plane Unlocked");
+                Debug.Log("Premium plane unlocked");
             else
-                Debug.Log("No NFT Found");
+                Debug.Log("Player does not own NFT");
         }
         catch (System.Exception e)
         {
