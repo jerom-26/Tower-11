@@ -1888,7 +1888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 63.706238}
+  m_AnchoredPosition: {x: 0, y: 63.7063}
   m_SizeDelta: {x: 543.046, y: 127.412506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &594287129
@@ -2205,7 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee70e1de706d39f4fa36e0a2904707d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalletConnect
-  walletAddress: 
+  walletAddress: 0xD679D38406570F5Cfa05d6857963e5BaA329BcB
   nftChecker: {fileID: 618327011}
 --- !u!114 &618327013
 MonoBehaviour:
