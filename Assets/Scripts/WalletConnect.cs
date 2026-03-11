@@ -9,8 +9,13 @@ public class WalletConnect : MonoBehaviour
 
     private bool eventRegistered = false;
 
-    public void ConnectWallet()
+    public async void ConnectWallet()
     {
+        while (!AppKit.IsInitialized)
+        {
+            await System.Threading.Tasks.Task.Delay(100);
+        }
+
         if (!eventRegistered)
         {
             AppKit.AccountConnected += OnAccountConnected;
