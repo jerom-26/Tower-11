@@ -305,6 +305,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76741359}
   m_CullTransparentMesh: 1
+--- !u!1001 &107855627
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710658489450244879, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019781919744940759, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
+      propertyPath: m_Name
+      value: Reown AppKit
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fc9e7b2d2aa114b7684aede0fa95d202, type: 3}
 --- !u!1 &193906928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,7 +1945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 63.7063}
+  m_AnchoredPosition: {x: 0, y: 63.706238}
   m_SizeDelta: {x: 543.046, y: 127.412506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &594287129
@@ -1935,9 +1992,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1870947324}
-        m_TargetAssemblyTypeName: WalletManager, Assembly-CSharp
-        m_MethodName: ConnectWalletButton
+      - m_Target: {fileID: 1036811531}
+        m_TargetAssemblyTypeName: WalletConnect, Assembly-CSharp
+        m_MethodName: ConnectWallet
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3388,6 +3445,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874799006}
   m_CullTransparentMesh: 1
+--- !u!1 &879587375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 879587379}
+  - component: {fileID: 879587378}
+  m_Layer: 0
+  m_Name: WalletSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &879587378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879587375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb6df50eeaa7ed4381511b01e402f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!4 &879587379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879587375}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 77.20206, y: -49.90955, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &909370823
 GameObject:
   m_ObjectHideFlags: 0
@@ -3745,6 +3846,89 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017844319}
   m_CullTransparentMesh: 1
+--- !u!1 &1036811527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1036811529}
+  - component: {fileID: 1036811528}
+  - component: {fileID: 1036811531}
+  - component: {fileID: 1036811530}
+  m_Layer: 0
+  m_Name: ThirdwebManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1036811528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036811527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46ce7448bd81e2468a9c174e6f6caf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Thirdweb.Unity.ThirdwebManager
+  <InitializeOnAwake>k__BackingField: 1
+  <InitializeOnStart>k__BackingField: 0
+  <ShowDebugLogs>k__BackingField: 1
+  <AutoConnectLastWallet>k__BackingField: 0
+  <RedirectPageHtmlOverride>k__BackingField: 
+  <RpcOverrides>k__BackingField: []
+  <ClientId>k__BackingField: 1d96675c698dde2d7cae8ba67cf22314
+  <BundleId>k__BackingField: 
+--- !u!4 &1036811529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036811527}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 623.9979, y: 404.68472, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1036811530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036811527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9c52c7eb3a7d244b68f7cd1450c842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NFTChecker
+  contractAddress: 0xF6c82D77918160D1D9c35dee0a5a56E9b6AC32C
+  chainId: 80002
+  hasPremiumPlane: 0
+--- !u!114 &1036811531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036811527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee70e1de706d39f4fa36e0a2904707d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WalletConnect
+  walletAddress: 
+  nftChecker: {fileID: 1036811530}
 --- !u!1 &1047423199
 GameObject:
   m_ObjectHideFlags: 0
@@ -6256,108 +6440,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861803837}
   m_CullTransparentMesh: 1
---- !u!1 &1870947321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1870947325}
-  - component: {fileID: 1870947324}
-  - component: {fileID: 1870947323}
-  - component: {fileID: 1870947326}
-  - component: {fileID: 1870947327}
-  - component: {fileID: 1870947328}
-  m_Layer: 0
-  m_Name: Web3Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1870947323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9c52c7eb3a7d244b68f7cd1450c842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  contractAddress: 0xF6c82D77918160D1D9c35dee0a5a56E9b6AC32C
-  chainId: 80002
-  hasPremiumPlane: 0
-  premiumManager: {fileID: 1870947326}
---- !u!114 &1870947324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee70e1de706d39f4fa36e0a2904707d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WalletConnect
---- !u!4 &1870947325
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.12664, y: 6.52465, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1870947326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf992334190fca47b9a39c0a6327492, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PremiumManager
---- !u!114 &1870947327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4390d2a853923e47a922ccfc4427080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  nftService: {fileID: 1870947323}
---- !u!114 &1870947328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc369273c1943e3479ac187c931f7232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  premiumManager: {fileID: 0}
 --- !u!1 &1921298034
 GameObject:
   m_ObjectHideFlags: 0
@@ -7182,4 +7264,6 @@ SceneRoots:
   - {fileID: 1180087756}
   - {fileID: 844275208}
   - {fileID: 437453704}
-  - {fileID: 1870947325}
+  - {fileID: 107855627}
+  - {fileID: 1036811529}
+  - {fileID: 879587379}
