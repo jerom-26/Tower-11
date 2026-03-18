@@ -7,16 +7,17 @@ public class Web3Manager : MonoBehaviour
     public void OnWalletConnected(string wallet)
     {
         Debug.Log("Wallet connected: " + wallet);
+
     }
 
     public void OnNFTChecked(string balance)
     {
         Debug.Log("NFT Balance: " + balance);
 
-        int b = 0;
-        int.TryParse(balance, out b);
+        int parsedBalance = 0;
+        int.TryParse(balance, out parsedBalance);
 
-        bool hasNFT = b > 0;
+        bool hasNFT = parsedBalance > 0;
 
         if (premiumManager != null)
         {
