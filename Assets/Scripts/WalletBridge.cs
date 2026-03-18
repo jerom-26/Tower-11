@@ -2,23 +2,25 @@ using UnityEngine;
 
 public class WalletBridge : MonoBehaviour
 {
-    public NFTService nftService;
+    public Web3Manager web3Manager;
 
     public void OnWalletConnected(string walletAddress)
     {
         Debug.Log("Wallet connected: " + walletAddress);
 
-        if (nftService != null)
+        if (web3Manager != null)
         {
-            StartCoroutine(CheckNFT(walletAddress));
+            web3Manager.OnWalletConnected(walletAddress);
         }
     }
 
-    System.Collections.IEnumerator CheckNFT(string wallet)
+    public void OnNFTChecked(string balance)
     {
-        var task = nftService.CheckNFT(wallet);
+        Debug.Log("NFT balance from JS: " + balance);
 
-        while (!task.IsCompleted)
-            yield return null;
+        if (web3Manager != null)
+        {
+            web3Manager.OnNFTChecked(balance);
+        }
     }
 }
