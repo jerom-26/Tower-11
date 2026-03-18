@@ -1937,7 +1937,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1870947324}
         m_TargetAssemblyTypeName: WalletManager, Assembly-CSharp
-        m_MethodName: ConnectWalletButton
+        m_MethodName: Connect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6266,9 +6266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1870947325}
   - component: {fileID: 1870947324}
-  - component: {fileID: 1870947323}
   - component: {fileID: 1870947326}
-  - component: {fileID: 1870947327}
   - component: {fileID: 1870947328}
   m_Layer: 0
   m_Name: Web3Manager
@@ -6277,22 +6275,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1870947323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9c52c7eb3a7d244b68f7cd1450c842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  contractAddress: 0xF6c82D77918160D1D9c35dee0a5a56E9b6AC32C
-  chainId: 80002
-  hasPremiumPlane: 0
-  premiumManager: {fileID: 1870947326}
 --- !u!114 &1870947324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6332,7 +6314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf992334190fca47b9a39c0a6327492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PremiumManager
---- !u!114 &1870947327
+--- !u!114 &1870947328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6341,23 +6323,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1870947321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4390d2a853923e47a922ccfc4427080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  nftService: {fileID: 1870947323}
---- !u!114 &1870947328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870947321}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc369273c1943e3479ac187c931f7232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  premiumManager: {fileID: 0}
+  premiumManager: {fileID: 1870947326}
 --- !u!1 &1921298034
 GameObject:
   m_ObjectHideFlags: 0
