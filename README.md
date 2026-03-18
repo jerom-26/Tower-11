@@ -1,114 +1,143 @@
-🎮 Tower 11
+# 🎮 Tower 11
 
-Tower 11 is a fast-paced 2D arcade survival game built with Unity.
-Control a plane flying through a scrolling cityscape, dodge deadly towers and unpredictable rockets, and survive as long as possible to climb the global leaderboard.
-<img width="852" height="472" alt="image" src="https://github.com/user-attachments/assets/44c43626-3f02-47cf-bdee-6d6453ef647f" />
-<img width="1601" height="904" alt="image" src="https://github.com/user-attachments/assets/a0167784-5baa-4d5b-93a0-8ae717a53841" />
-🕹️ Gameplay Preview
+Tower 11 is a fast-paced 2D arcade survival game built with Unity. Control a plane flying through a scrolling cityscape, dodge deadly towers and unpredictable rockets, and survive as long as possible to climb the global leaderboard.
 
-Simple to play. Hard to master.
+---
 
-Fly continuously through a dynamic city
+## 🕹️ Gameplay Preview
 
-Avoid towers and guided rockets
+**Simple to play. Hard to master.**
 
-One mistake = instant game over
+- Fly continuously through a dynamic city  
+- Avoid towers and guided rockets  
+- One mistake = instant game over  
+- Difficulty increases the longer you survive
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a0167784-5baa-4d5b-93a0-8ae717a53841" width="700"/>
+  <br/>
+</p>
 
-Difficulty increases the longer you survive
+---
 
-🎯 Core Gameplay
+## 🎯 Core Gameplay
 
-Tap / Click / Space → Fly up
+### Controls
+- Tap / Click / Space → Fly up  
+- Release → Fall down  
+- ESC → Pause menu  
 
-Release → Fall down
+### Scoring
+- Pass towers to increase score  
+- Higher score = higher difficulty  
+- New personal bests are saved automatically  
 
-ESC → Pause menu
+---
 
-Scoring
+## 🚀 Rocket Types
 
-Pass towers to increase score
+All rockets share the same visual design — their behavior is what makes them dangerous 👀  
 
-Higher score = higher difficulty
+- 🎯 **Chase** — Follows the player  
+- ⏳ **Charge** — Waits, then attacks  
+- ➡️ **Decoy** — Flies straight  
+- 🟢 **Dummy** — Harmless (does not kill)  
 
-New personal bests are saved automatically
+---
 
-🚀 Rocket Types
+## ✨ Features
 
-All rockets share the same visual design — their behavior is what makes them dangerous 👀
+- Smooth and responsive 2D controls  
+- Dynamic difficulty scaling  
+- Parallax scrolling background  
+- Pause menu with How To Play guide  
+- Local username system with validation  
+- Persistent high scores  
+- Online leaderboard integration
 
-🎯 Chase — Follows the player
+---
 
-⏳ Charge — Waits, then attacks
+## 🌐 Online Leaderboard (Supabase)
 
-➡️ Decoy — Flies straight
+- Players register a username once  
+- Scores sync only when a new personal best is reached  
+- Global leaderboard fetched in real time  
 
-🟢 Dummy — Harmless (does not kill)
+### Username Rules
+- Lowercase only (a–z)  
+- Numbers allowed (0–9)  
+- Underscore allowed (_)  
+- Length limits enforced  
 
-✨ Features
+---
 
-Smooth and responsive 2D controls
+## 🔗 Web3 Integration (Experimental)
 
-Dynamic difficulty scaling
+Tower 11 includes a Web3 layer that connects gameplay with blockchain-based ownership and identity.
 
-Parallax scrolling background
+### 🔐 Wallet Connection
+- Connect wallet through browser (WebGL build)
+- Wallet acts as a unique player identity
 
-Pause menu with How To Play guide
+### 🧾 NFT Unlock System
+- Game checks NFT ownership from a smart contract  
+- If owned → unlocks premium in-game content (e.g., special plane)  
 
-Local username system with validation
+### ⚙️ How It Works
+- Uses `balanceOf` to verify NFT ownership  
+- JavaScript ↔ Unity bridge for WebGL communication  
+- Ethers.js used for blockchain interaction  
 
-Persistent high scores
+---
 
-Online leaderboard integration
+## 💡 Why Web3?
 
-🌐 Online Leaderboard (Supabase)
+- **True Ownership** → Players own unlocks as NFTs  
+- **Universal Identity** → Wallet replaces login systems  
+- **Future Economy** → Enables tokens, trading, rewards  
+- **Secure Unlocks** → Cannot fake ownership locally  
 
-Players register a username once
+---
 
-Scores sync only when a new personal best is reached
+## 🛠️ Technical Details
 
-Global leaderboard fetched in real time
+| Category | Tech |
+|--------|------|
+| Engine | Unity (2D) |
+| Language | C# |
+| Backend | Supabase (REST API) |
+| Web3 | Ethers.js + Smart Contracts |
+| Platforms | WebGL / Desktop |
+| Version Control | Git & GitHub |
 
-Username rules
+---
 
-Lowercase only (a–z)
+## 📂 Project Highlights
 
-Numbers allowed (0–9)
+- Object pooling for performance  
+- Score-based difficulty scaling  
+- Modular UI system  
+- Clean separation of game logic & UI  
+- Web3 wallet ↔ Unity communication bridge  
+- On-chain NFT validation system  
 
-Underscore allowed (_)
+---
 
-Length limits enforced
+## 🚧 Future Improvements
 
-🛠️ Technical Details
-Category	Tech
-Engine	Unity (2D)
-Language	C#
-Backend	Supabase (REST API)
-Platforms	WebGL / Desktop
-Version Control	Git & GitHub
-📂 Project Highlights
+- New environments & themes  
+- Additional hazards and enemy behaviors  
+- Power-ups (slow time, shields, invincibility)  
+- Mobile-friendly controls  
+- Sound & visual polish  
 
-Object pooling for performance
+### 🔮 Web3 Roadmap
+- Token-based rewards  
+- On-chain leaderboard  
+- NFT achievements  
+- Marketplace for skins  
 
-Score-based difficulty scaling
+---
 
-Modular UI (Pause, Game Over, How To Play)
+## 👤 Developer
 
-Clean separation of game logic & UI logic
-
-🚧 Future Improvements
-
-New environments & themes
-
-Additional hazards and enemy behaviors
-
-Power-ups (slow time, shields, invincibility)
-
-Mobile-friendly touch controls
-
-Sound & visual polish
-
-👤 Developer
-
-Built as an indie project using Unity + C#, focused on clean mechanics, performance, and scalable systems
-
-
+Built as an indie project using Unity + C#, focused on clean mechanics, performance, and scalable systems with Web3 integration.
