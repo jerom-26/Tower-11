@@ -1,12 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Web3Manager : MonoBehaviour
 {
     public PremiumManager premiumManager;
-
+    public Text walletText;
+    public Text nftText;
     public void OnWalletConnected(string wallet)
     {
         Debug.Log("Wallet connected: " + wallet);
+        if (!string.IsNullOrEmpty(wallet) && wallet.Length > 10)
+        {
+            string shortAddress = wallet.Substring(0, 6) + "..." + wallet.Substring(wallet.Length - 4);
+
+            if (walletText != null)
+                walletText.text = "Wallet Connected: " + shortAddress + " ";
+        }
 
     }
 
@@ -23,6 +32,14 @@ public class Web3Manager : MonoBehaviour
         {
             premiumManager.ApplyPremium(hasNFT);
         }
+        if (nftText != null)
+        {
+            if (hasNFT)
+                nftText.text = "NFT: Detected ";
+            else
+                nftText.text = "NFT: Not Found ";
+        }
+
 
         if (hasNFT)
             Debug.Log("Premium plane unlocked");
