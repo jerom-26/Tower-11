@@ -89,6 +89,28 @@ Tower 11 includes a Web3 layer that connects gameplay with blockchain-based owne
 
 ---
 
+## 🧠 What Was Built
+
+### Web3 + Unity Integration
+- Implemented wallet connection using MetaMask + Ethers.js
+- Built a JS plugin bridge to connect WebGL → Unity
+- Passed wallet address into Unity game systems in real time
+- Designed system where wallet acts as player identity
+
+### NFT Verification System
+- Integrated smart contract calls (balanceOf) to verify ownership
+- Built logic to unlock premium content dynamically
+- Built logic to unlock premium content dynamically
+
+### Debugging & Problem Solving
+- Uses `balanceOf` to verify NFT ownership
+- Debugged WebGL runtime issues (e.g., memory errors, missing libraries)
+- Fixed wallet connection inconsistencies across browser sessions
+- Handled async communication between JS and Unity safely
+- Traced blockchain calls using console + RPC responses
+
+---
+
 ## 💡 Why Web3?
 
 - **True Ownership** → Players own unlocks as NFTs  
