@@ -5034,7 +5034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 227.6834, y: -52.315002}
+  m_AnchoredPosition: {x: 227.68335, y: -52.31494}
   m_SizeDelta: {x: 455.3668, y: 104.630005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1473015767
@@ -6477,7 +6477,7 @@ GameObject:
   - component: {fileID: 1870947326}
   - component: {fileID: 1870947328}
   m_Layer: 0
-  m_Name: Web3Manager
+  m_Name: WalletManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6495,6 +6495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee70e1de706d39f4fa36e0a2904707d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalletConnect
+  web3Manager: {fileID: 1870947328}
 --- !u!4 &1870947325
 Transform:
   m_ObjectHideFlags: 0
