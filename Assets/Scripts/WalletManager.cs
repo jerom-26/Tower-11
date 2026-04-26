@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WalletManager : MonoBehaviour
 {
@@ -31,6 +32,16 @@ public class WalletManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -38,6 +49,20 @@ public class WalletManager : MonoBehaviour
 #else
         if (web3Manager != null)
             web3Manager.SetDisconnected();
+#endif
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        web3Manager = FindObjectOfType<Web3Manager>();
+
+        if (web3Manager != null && !string.IsNullOrEmpty(currentWallet))
+        {
+            web3Manager.OnWalletConnected(currentWallet);
+        }
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        RestoreWalletSession();
 #endif
     }
 
@@ -54,10 +79,8 @@ public class WalletManager : MonoBehaviour
     {
         Debug.Log("Wallet Connected: " + address);
         currentWallet = address;
-
         if (web3Manager != null)
             web3Manager.OnWalletConnected(address);
-
         if (connectButtonText != null)
             connectButtonText.text = "CONNECTED";
     }
@@ -65,7 +88,6 @@ public class WalletManager : MonoBehaviour
     public void OnNFTChecked(string balance)
     {
         Debug.Log("NFT balance from JS: " + balance);
-
         if (web3Manager != null)
             web3Manager.OnNFTChecked(balance);
     }
@@ -74,7 +96,6 @@ public class WalletManager : MonoBehaviour
     {
         Debug.Log("Wallet disconnected or no session");
         currentWallet = "";
-
         if (web3Manager != null)
             web3Manager.SetDisconnected();
         if (connectButtonText != null)
