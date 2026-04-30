@@ -17,8 +17,9 @@ public class WalletManager : MonoBehaviour
 
     public Web3Manager web3Manager;
     public Text connectButtonText;
-
+    private string lastNFTBalance = "";
     private string currentWallet = "";
+    private bool isRestoring = false;
 
     private void Awake()
     {
@@ -44,8 +45,10 @@ public class WalletManager : MonoBehaviour
 
     private void Start()
     {
+        FindSceneReferences();
+
 #if UNITY_WEBGL && !UNITY_EDITOR
-        RestoreWalletSession();
+        RestoreOnce();
 #else
         if (web3Manager != null)
             web3Manager.SetDisconnected();
@@ -54,16 +57,57 @@ public class WalletManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        web3Manager = FindObjectOfType<Web3Manager>();
+        FindSceneReferences();
 
-        if (web3Manager != null && !string.IsNullOrEmpty(currentWallet))
+        if (web3Manager != null)
         {
-            web3Manager.OnWalletConnected(currentWallet);
+            if (!string.IsNullOrEmpty(currentWallet))
+            {
+                web3Manager.OnWalletConnected(currentWallet);
+
+                if (!string.IsNullOrEmpty(lastNFTBalance))
+                {
+                    web3Manager.OnNFTChecked(lastNFTBalance);
+                }
+                else if (web3Manager.nftText != null)
+                {
+                    web3Manager.nftText.text = "NFT: Checking...";
+                }
+            }
         }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        RestoreWalletSession();
+        RestoreOnce();
 #endif
+    }
+
+    private void FindSceneReferences()
+    {
+        web3Manager = FindObjectOfType<Web3Manager>();
+
+        connectButtonText = null;
+        GameObject btnTextObj = GameObject.Find("ConnectWalletText");
+
+        if (btnTextObj != null)
+            connectButtonText = btnTextObj.GetComponent<Text>();
+
+        UpdateConnectButtonText();
+    }
+
+    private void RestoreOnce()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+    if (isRestoring) return;
+
+    isRestoring = true;
+    RestoreWalletSession();
+    Invoke(nameof(ResetRestoreLock), 1f);
+#endif
+    }
+
+    private void ResetRestoreLock()
+    {
+        isRestoring = false;
     }
 
     public void Connect()
@@ -79,15 +123,27 @@ public class WalletManager : MonoBehaviour
     {
         Debug.Log("Wallet Connected: " + address);
         currentWallet = address;
+
         if (web3Manager != null)
+        {
             web3Manager.OnWalletConnected(address);
-        if (connectButtonText != null)
-            connectButtonText.text = "CONNECTED";
+
+            if (web3Manager.nftText != null)
+                web3Manager.nftText.text = "NFT: Checking...";
+        }
+
+        UpdateConnectButtonText();
     }
 
     public void OnNFTChecked(string balance)
     {
         Debug.Log("NFT balance from JS: " + balance);
+
+        lastNFTBalance = balance;
+
+        if (web3Manager == null)
+            web3Manager = FindObjectOfType<Web3Manager>();
+
         if (web3Manager != null)
             web3Manager.OnNFTChecked(balance);
     }
@@ -96,9 +152,19 @@ public class WalletManager : MonoBehaviour
     {
         Debug.Log("Wallet disconnected or no session");
         currentWallet = "";
+
         if (web3Manager != null)
             web3Manager.SetDisconnected();
-        if (connectButtonText != null)
-            connectButtonText.text = "CONNECT WALLET";
+
+        UpdateConnectButtonText();
+    }
+
+    private void UpdateConnectButtonText()
+    {
+        if (connectButtonText == null) return;
+
+        connectButtonText.text = string.IsNullOrEmpty(currentWallet)
+            ? "CONNECT WALLET"
+            : "CONNECTED";
     }
 }
