@@ -1,0 +1,1638 @@
+fileFormatVersion: 2
+guid: 85751fa1699f2c9459e6fd81e868cea1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5544064875476025109
+    second: Premium Plane_0
+  - first:
+      213: 1662511204401548781
+    second: Premium Plane_1
+  - first:
+      213: 7860941663747868267
+    second: Premium Plane_2
+  - first:
+      213: -317122638205654590
+    second: Premium Plane_3
+  - first:
+      213: -269809049489291529
+    second: Premium Plane_4
+  - first:
+      213: -85932139645372766
+    second: Premium Plane_5
+  - first:
+      213: 2164598244584132121
+    second: Premium Plane_6
+  - first:
+      213: -2340532360828243202
+    second: Premium Plane_7
+  - first:
+      213: 6029132034865022352
+    second: Premium Plane_8
+  - first:
+      213: -2172234069205261860
+    second: Premium Plane_9
+  - first:
+      213: 6470888211738120476
+    second: Premium Plane_10
+  - first:
+      213: 1547503195514662026
+    second: Premium Plane_11
+  - first:
+      213: 1525864704107066425
+    second: Premium Plane_12
+  - first:
+      213: 2687725295421358964
+    second: Premium Plane_13
+  - first:
+      213: -2836440336305757907
+    second: Premium Plane_14
+  - first:
+      213: 1524566334327565673
+    second: Premium Plane_15
+  - first:
+      213: -5241366398075639504
+    second: Premium Plane_16
+  - first:
+      213: 91470507899815962
+    second: Premium Plane_17
+  - first:
+      213: -1703197676918824574
+    second: Premium Plane_18
+  - first:
+      213: -150723576898149817
+    second: Premium Plane_19
+  - first:
+      213: -2219331720666630498
+    second: Premium Plane_20
+  - first:
+      213: 4256207301066613136
+    second: Premium Plane_21
+  - first:
+      213: -2704887634105099615
+    second: Premium Plane_22
+  - first:
+      213: -3827626254835312610
+    second: Premium Plane_23
+  - first:
+      213: 2148053754001921282
+    second: Premium Plane_24
+  - first:
+      213: -5331055574320893211
+    second: Premium Plane_25
+  - first:
+      213: 4171370256687607148
+    second: Premium Plane_26
+  - first:
+      213: -9006674601471734506
+    second: Premium Plane_27
+  - first:
+      213: -6767276888175522967
+    second: Premium Plane_28
+  - first:
+      213: 7631838912890887252
+    second: Premium Plane_29
+  - first:
+      213: 4919732525179537873
+    second: Premium Plane_30
+  - first:
+      213: 7612982685416481277
+    second: Premium Plane_31
+  - first:
+      213: 6317481160300465990
+    second: Premium Plane_32
+  - first:
+      213: -7729815113347723854
+    second: Premium Plane_33
+  - first:
+      213: -2274593997824344360
+    second: Premium Plane_34
+  - first:
+      213: 8927042868531919501
+    second: Premium Plane_35
+  - first:
+      213: -6028318533674269185
+    second: Premium Plane_36
+  - first:
+      213: 2943892758708992780
+    second: Premium Plane_37
+  - first:
+      213: 870007642753472095
+    second: Premium Plane_38
+  - first:
+      213: -8276125239943573566
+    second: Premium Plane_39
+  - first:
+      213: 7766329663514630365
+    second: Premium Plane_40
+  - first:
+      213: -3489209321508231127
+    second: Premium Plane_41
+  - first:
+      213: 1502555631398126606
+    second: Premium Plane_42
+  - first:
+      213: -4522133457610172701
+    second: Premium Plane_43
+  - first:
+      213: -1591451476044888732
+    second: Premium Plane_44
+  - first:
+      213: 6619497229390638007
+    second: Premium Plane_45
+  - first:
+      213: -5802157386642305825
+    second: Premium Plane_46
+  - first:
+      213: 5846031689293908330
+    second: Premium Plane_47
+  - first:
+      213: 7738498178430474453
+    second: Premium Plane_48
+  - first:
+      213: -6594721044508235533
+    second: Premium Plane_49
+  - first:
+      213: 5587269271831609143
+    second: Premium Plane_50
+  - first:
+      213: 3828199969962901900
+    second: Premium Plane_51
+  - first:
+      213: 1601538280625630699
+    second: Premium Plane_52
+  - first:
+      213: -6327464014542240155
+    second: Premium Plane_53
+  - first:
+      213: 6076427005546913989
+    second: Premium Plane_54
+  - first:
+      213: 3612568762777793656
+    second: Premium Plane_55
+  - first:
+      213: 5427504845859583785
+    second: Premium Plane_56
+  - first:
+      213: -3125510331000023811
+    second: Premium Plane_57
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Premium Plane_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 246
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51ff77a61a970fc40800000000000000
+      internalID: 5544064875476025109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 991
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ded067dc12d621710800000000000000
+      internalID: 1662511204401548781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_2
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 983
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6682cb4bcca71d60800000000000000
+      internalID: 7860941663747868267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_3
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 963
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9648704aa599bf0800000000000000
+      internalID: -317122638205654590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_4
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 954
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f641085912714cf0800000000000000
+      internalID: -269809049489291529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 944
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a6f5ad9c25becef0800000000000000
+      internalID: -85932139645372766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_6
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 895
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91e0fd982a23a0e10800000000000000
+      internalID: 2164598244584132121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_7
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 903
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef2b68fe732c48fd0800000000000000
+      internalID: -2340532360828243202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_8
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 807
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 095ce0a54a7cba350800000000000000
+      internalID: 6029132034865022352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_9
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 951
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd1e4008f9caad1e0800000000000000
+      internalID: -2172234069205261860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_10
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 746
+        width: 730
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c11d9e95b863dc950800000000000000
+      internalID: 6470888211738120476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_11
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 960
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8cee6115f5d97510800000000000000
+      internalID: 1547503195514662026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_12
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 952
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 934bb9f2dd5fc2510800000000000000
+      internalID: 1525864704107066425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_13
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 944
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4730c6f7ae7bc4520800000000000000
+      internalID: 2687725295421358964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_14
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 896
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d21e7efca80f2a8d0800000000000000
+      internalID: -2836440336305757907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_15
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 781
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96d2d1ae009582510800000000000000
+      internalID: 1524566334327565673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_16
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 755
+        width: 7
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0396809e70de247b0800000000000000
+      internalID: -5241366398075639504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_17
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 776
+        width: 53
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a180bca31f7f44100800000000000000
+      internalID: 91470507899815962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_18
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 747
+        width: 36
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 281abfc9cb60d58e0800000000000000
+      internalID: -1703197676918824574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_19
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 975
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 742a5b394b588edf0800000000000000
+      internalID: -150723576898149817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_20
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 775
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e96b8eefe895331e0800000000000000
+      internalID: -2219331720666630498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_21
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 936
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 091ef7e6df5111b30800000000000000
+      internalID: 4256207301066613136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_22
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 2
+        width: 474
+        height: 1022
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aa91d3270f467ad0800000000000000
+      internalID: -2704887634105099615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_23
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 986
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e18159b633a81eac0800000000000000
+      internalID: -3827626254835312610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_24
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 978
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2059ab5228b6fcd10800000000000000
+      internalID: 2148053754001921282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_25
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 962
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e2bcb643394406b0800000000000000
+      internalID: -5331055574320893211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_26
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 874
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6dae78c52fa3e930800000000000000
+      internalID: 4171370256687607148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_27
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 1346
+        height: 748
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d8ebb5b2dd10380800000000000000
+      internalID: -9006674601471734506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_28
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 744
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96b4697568dc512a0800000000000000
+      internalID: -6767276888175522967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_29
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 495
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45c5dd95e0db9e960800000000000000
+      internalID: 7631838912890887252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_30
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 302
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d903417aa6664440800000000000000
+      internalID: 4919732525179537873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_31
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 286
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df1e275ca6fb6a960800000000000000
+      internalID: 7612982685416481277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_32
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 223
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64f8ee2d4a33ca750800000000000000
+      internalID: 6317481160300465990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_33
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 231
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bd8675db1e2ab490800000000000000
+      internalID: -7729815113347723854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_34
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 200
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8deb17f6fc40f60e0800000000000000
+      internalID: -2274593997824344360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_35
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 181
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a7781013a33eb70800000000000000
+      internalID: 8927042868531919501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_36
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 186
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff50177ab3c175ca0800000000000000
+      internalID: -6028318533674269185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_37
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 166
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0bb1bbdddecad820800000000000000
+      internalID: 2943892758708992780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_38
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 171
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5612327753e21c00800000000000000
+      internalID: 870007642753472095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_39
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 152
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cfc48c61fb452d80800000000000000
+      internalID: -8276125239943573566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_40
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 147
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd85e526eab87cb60800000000000000
+      internalID: 7766329663514630365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_41
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 126
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9282584db96d39fc0800000000000000
+      internalID: -3489209321508231127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_42
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 95
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e048fb8c2662ad410800000000000000
+      internalID: 1502555631398126606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_43
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 104
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e69c3064972e31c0800000000000000
+      internalID: -4522133457610172701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_44
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 104
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 465c21d70570ae9e0800000000000000
+      internalID: -1591451476044888732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_45
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 96
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bbe28598ad2ddb50800000000000000
+      internalID: 6619497229390638007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_46
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 86
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdcc64619989a7fa0800000000000000
+      internalID: -5802157386642305825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_47
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 68
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a694a0a09d6412150800000000000000
+      internalID: 5846031689293908330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_48
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 71
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d81b5cc71ba46b60800000000000000
+      internalID: 7738498178430474453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_49
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 47
+        width: 8
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f82b4d7628da74a0800000000000000
+      internalID: -6594721044508235533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_50
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 39
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f7af3dcc7f98d40800000000000000
+      internalID: 5587269271831609143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_51
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 34
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81ccca079f702530800000000000000
+      internalID: 3828199969962901900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_52
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 25
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bed61e6b49ec93610800000000000000
+      internalID: 1601538280625630699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_53
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 8
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 566842cc0055038a0800000000000000
+      internalID: -6327464014542240155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_54
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 23
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c0e631da2ec35450800000000000000
+      internalID: 6076427005546913989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_55
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 23
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 874fa08462c622230800000000000000
+      internalID: 3612568762777793656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_56
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 10
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 927fb22b6ee525b40800000000000000
+      internalID: 5427504845859583785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Premium Plane_57
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df41ee2e9e4ff94d0800000000000000
+      internalID: -3125510331000023811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Premium Plane_0: 5544064875476025109
+      Premium Plane_1: 1662511204401548781
+      Premium Plane_10: 6470888211738120476
+      Premium Plane_11: 1547503195514662026
+      Premium Plane_12: 1525864704107066425
+      Premium Plane_13: 2687725295421358964
+      Premium Plane_14: -2836440336305757907
+      Premium Plane_15: 1524566334327565673
+      Premium Plane_16: -5241366398075639504
+      Premium Plane_17: 91470507899815962
+      Premium Plane_18: -1703197676918824574
+      Premium Plane_19: -150723576898149817
+      Premium Plane_2: 7860941663747868267
+      Premium Plane_20: -2219331720666630498
+      Premium Plane_21: 4256207301066613136
+      Premium Plane_22: -2704887634105099615
+      Premium Plane_23: -3827626254835312610
+      Premium Plane_24: 2148053754001921282
+      Premium Plane_25: -5331055574320893211
+      Premium Plane_26: 4171370256687607148
+      Premium Plane_27: -9006674601471734506
+      Premium Plane_28: -6767276888175522967
+      Premium Plane_29: 7631838912890887252
+      Premium Plane_3: -317122638205654590
+      Premium Plane_30: 4919732525179537873
+      Premium Plane_31: 7612982685416481277
+      Premium Plane_32: 6317481160300465990
+      Premium Plane_33: -7729815113347723854
+      Premium Plane_34: -2274593997824344360
+      Premium Plane_35: 8927042868531919501
+      Premium Plane_36: -6028318533674269185
+      Premium Plane_37: 2943892758708992780
+      Premium Plane_38: 870007642753472095
+      Premium Plane_39: -8276125239943573566
+      Premium Plane_4: -269809049489291529
+      Premium Plane_40: 7766329663514630365
+      Premium Plane_41: -3489209321508231127
+      Premium Plane_42: 1502555631398126606
+      Premium Plane_43: -4522133457610172701
+      Premium Plane_44: -1591451476044888732
+      Premium Plane_45: 6619497229390638007
+      Premium Plane_46: -5802157386642305825
+      Premium Plane_47: 5846031689293908330
+      Premium Plane_48: 7738498178430474453
+      Premium Plane_49: -6594721044508235533
+      Premium Plane_5: -85932139645372766
+      Premium Plane_50: 5587269271831609143
+      Premium Plane_51: 3828199969962901900
+      Premium Plane_52: 1601538280625630699
+      Premium Plane_53: -6327464014542240155
+      Premium Plane_54: 6076427005546913989
+      Premium Plane_55: 3612568762777793656
+      Premium Plane_56: 5427504845859583785
+      Premium Plane_57: -3125510331000023811
+      Premium Plane_6: 2164598244584132121
+      Premium Plane_7: -2340532360828243202
+      Premium Plane_8: 6029132034865022352
+      Premium Plane_9: -2172234069205261860
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

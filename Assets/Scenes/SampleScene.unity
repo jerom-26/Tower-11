@@ -6496,6 +6496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalletConnect
   web3Manager: {fileID: 1870947328}
+  connectButtonText: {fileID: 0}
 --- !u!4 &1870947325
 Transform:
   m_ObjectHideFlags: 0
@@ -6523,6 +6524,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf992334190fca47b9a39c0a6327492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PremiumManager
+  planeSpriteRenderer: {fileID: 667863068}
+  normalPlaneSprite: {fileID: 21300000, guid: 482bc80af7530654991ef45d9c35efe5, type: 3}
+  premiumPlaneSprite: {fileID: 21300000, guid: 85751fa1699f2c9459e6fd81e868cea1, type: 3}
 --- !u!114 &1870947328
 MonoBehaviour:
   m_ObjectHideFlags: 0
