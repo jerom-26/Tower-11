@@ -83,7 +83,7 @@ public class WalletManager : MonoBehaviour
 
     private void FindSceneReferences()
     {
-        web3Manager = FindObjectOfType<Web3Manager>();
+        web3Manager = FindFirstObjectByType<Web3Manager>();
 
         connectButtonText = null;
         GameObject btnTextObj = GameObject.Find("ConnectWalletText");
@@ -142,7 +142,7 @@ public class WalletManager : MonoBehaviour
         lastNFTBalance = balance;
 
         if (web3Manager == null)
-            web3Manager = FindObjectOfType<Web3Manager>();
+            web3Manager = FindFirstObjectByType<Web3Manager>();
 
         if (web3Manager != null)
             web3Manager.OnNFTChecked(balance);

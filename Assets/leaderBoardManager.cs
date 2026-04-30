@@ -31,6 +31,11 @@ public class LeaderboardManager : MonoBehaviour
     public void SubmitScore(int score)
     {
         string username = PlayerPrefs.GetString("username", "");
+        username = username.Trim().ToLowerInvariant();
+
+        PlayerPrefs.SetString("username", username);
+        PlayerPrefs.Save();
+
         string error = ValidateUsernameRules(username);
 
         if (error != null)
