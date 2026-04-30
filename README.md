@@ -1,138 +1,67 @@
-# 🎮 Tower 11
-Tower 11 is a fast-paced 2D arcade survival game built with Unity. Control a plane, dodge towers and rockets, and survive as long as possible while climbing the leaderboard.
+# Tower 11
+
+Tower 11 is a fast-paced 2D arcade survival game built with Unity. Control a plane, dodge towers and rockets, and survive as long as possible.
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/a0167784-5baa-4d5b-93a0-8ae717a53841" width="700"/>
 </p>
 
 ---
 
-## 🌐 Playable Versions
+## Play
 
-### 🎮 Standard Version
-👉 https://jerom001.itch.io/tower-11  
-
-### 🔗 Web3 Version (Experimental)
-👉 https://jerom001.github.io/Tower-11   
-
-- Includes MetaMask wallet connection  
-- NFT-based unlock system  
-- Runs directly in browser (WebGL)
+| Version | Link |
+|---------|------|
+| Standard | https://jerom001.itch.io/tower-11 |
+| Web3 (Experimental) | https://jerom001.github.io/Tower-11 |
 
 ---
 
-## 🕹️ Gameplay
+## Gameplay
 
-**Simple to play. Hard to master.**
+Fly through a city, avoid towers and rockets. One mistake ends the run. Difficulty scales with score.
 
-- Fly through a dynamic city  
-- Avoid towers and rockets  
-- One mistake = game over  
-- Difficulty increases over time  
+**Controls**
+- Tap / Click / Space — fly up
+- Release — fall
+- ESC — pause
 
----
-
-## 🎯 Core Gameplay
-
-### Controls
-- Tap / Click / Space → Fly up  
-- Release → Fall down  
-- ESC → Pause  
-
-### Scoring
-- Pass towers to increase score  
-- Score increases difficulty  
-- Personal bests are saved  
+**Rockets**
+- Chase — tracks your movement
+- Charge — delayed attack
+- Decoy — straight path
+- Dummy — harmless
 
 ---
 
-## 🚀 Rocket Types
+## Features
 
-All rockets share the same visuals — behavior defines difficulty:
-
-- 🎯 **Chase** — Tracks player movement  
-- ⏳ **Charge** — Delayed attack  
-- ➡️ **Decoy** — Straight movement  
-- 🟢 **Dummy** — Harmless  
-
----
-
-## ✨ Features
-
-- Smooth 2D movement system  
-- Dynamic difficulty scaling  
-- Parallax background  
-- Pause system with instructions  
-- Username system with validation  
-- Persistent high scores  
-- Online leaderboard integration  
+- Smooth 2D movement with dynamic difficulty scaling
+- Parallax background and pause system
+- Username system with validation
+- Persistent personal bests
+- Online leaderboard via Supabase (syncs on new high score only)
+- Object pooling for performance
 
 ---
 
-## 🌐 Online Leaderboard (Supabase)
+## Web3 Integration (Experimental)
 
-- Username-based system  
-- Syncs only on new high score  
-- Real-time leaderboard fetching  
+The Web3 version adds wallet-based identity and NFT-gated content on top of the standard build.
 
-### Username Rules
-- Lowercase letters (a–z)  
-- Numbers allowed (0–9)  
-- Underscore allowed (_)  
-- Length restrictions enforced  
+- MetaMask wallet connection via browser
+- Wallet address used as player identity
+- NFT ownership verified through `balanceOf` on a smart contract
+- Content unlocked dynamically based on ownership
 
----
-
-## 🔗 Web3 Integration (Experimental)
-
-### 🔐 Wallet Connection
-- MetaMask connection via browser  
-- Wallet used as player identity  
-
-### 🧾 NFT Unlock System
-- Uses smart contract `balanceOf`  
-- Unlocks premium in-game content  
-
-### ⚙️ Implementation
-- Ethers.js for blockchain interaction  
-- JavaScript ↔ Unity WebGL bridge  
-- Real-time wallet → game communication  
+**Implementation:** Ethers.js handles blockchain interaction through a JavaScript ↔ Unity WebGL plugin bridge, passing wallet state into game systems in real time.
 
 ---
 
-## 🧠 What Was Built
-
-### Web3 + Unity Integration
-- Wallet connection using MetaMask  
-- JS plugin bridge for WebGL → Unity  
-- Wallet address passed into game systems  
-- Wallet used as identity system  
-
-### NFT System
-- Smart contract interaction (balanceOf)  
-- Dynamic content unlock  
-- Secure ownership verification  
-
-### Debugging & Engineering
-- Fixed WebGL runtime errors  
-- Handled async JS ↔ Unity calls  
-- Debugged wallet inconsistencies  
-- Traced RPC + blockchain responses  
-
----
-
-## 💡 Why Web3?
-
-- Ownership of in-game items (NFTs)  
-- No traditional login system  
-- Future-ready economy system  
-- Secure unlock verification  
-
----
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Tech |
-|--------|------|
+|----------|------|
 | Engine | Unity (2D) |
 | Language | C# |
 | Backend | Supabase |
@@ -142,38 +71,10 @@ All rockets share the same visuals — behavior defines difficulty:
 
 ---
 
-## 📂 Highlights
+## Developer
 
-- Object pooling for performance  
-- Score-based difficulty system  
-- Modular UI architecture  
-- Web3 wallet ↔ Unity bridge  
-- NFT validation system  
+**Jerom Jiju** — Game Developer / Software Developer
 
----
-
-## 🚧 Future Improvements
-
-- New environments  
-- More enemy types  
-- Power-ups  
-- Mobile support  
-- Visual polish  
-
-### 🔮 Web3 Roadmap
-- Token rewards  
-- On-chain leaderboard  
-- NFT achievements  
-- Skin marketplace  
-
----
-
-## 👤 Developer
-
-**Jerom Jiju**  
-Game Developer | Software Developer  
-
-- GitHub: https://github.com/jerom001  
+- GitHub: https://github.com/jerom001
 - Itch.io: https://jerom001.itch.io
-- Web3 (Experimental): https://jerom001.github.io/Tower-11
-- LinkedIn: https://linkedin.com/in/jerom-jiju26  
+- LinkedIn: https://linkedin.com/in/jerom-jiju26
