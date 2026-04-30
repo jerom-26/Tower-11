@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="TemplateData/style.css">
 
   <meta http-equiv="Content-Security-Policy"
-        content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob:;">
+        content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; connect-src * 'self' data: blob: wss:;">
 
   <style>
     html, body {
@@ -25,60 +25,98 @@
     }
   </style>
 
-  <!-- ✅ LOAD ETHERS (ONLY ONCE, CORRECT PLACE) -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
-  <!-- ✅ DEBUG -->
   <script>
     window.addEventListener("load", () => {
       console.log("Page loaded");
-
-      if (typeof ethers !== "undefined") {
-        console.log("Ethers loaded ✅");
-      } else {
-        console.error("Ethers FAILED ❌");
-      }
+      console.log(typeof ethers !== "undefined" ? "Ethers loaded ✅" : "Ethers FAILED ❌");
     });
   </script>
 
-  <!-- ✅ WALLET FUNCTION -->
   <script>
-    window.connectWallet = async function () {
+    window.checkNFT = async function(wallet) {
+      const contractAddress = "0xF6c882D77918160D1D9c35dee0a5a56E9b6AC32C";
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const abi = ["function balanceOf(address owner) view returns (uint256)"];
+      const contract = new ethers.Contract(contractAddress, abi, provider);
+      return await contract.balanceOf(wallet);
+    };
 
+    window.ConnectWallet = async function () {
       if (typeof ethers === "undefined") {
-        alert("ethers.js not loaded");
+        console.error("ethers.js not loaded");
         return;
       }
 
       if (!window.ethereum) {
-        alert("MetaMask not installed");
+        console.error("MetaMask not installed");
         return;
       }
 
       try {
-        
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await provider.send("eth_requestAccounts", []);
 
-        await provider.send("eth_requestAccounts", []);
+        if (!accounts || accounts.length === 0) return;
 
-        const signer = provider.getSigner();
-        const address = await signer.getAddress();
-
-        console.log("Wallet:", address);
+        const address = accounts[0];
+        localStorage.setItem("walletAddress", address);
 
         if (window.unityInstance) {
-          window.unityInstance.SendMessage(
-            "Web3Manager",
-            "OnWalletConnected",
-            address
-          );
+          window.unityInstance.SendMessage("WalletManager", "OnWalletConnected", address);
         }
 
-        return address;
+        const balance = await window.checkNFT(address);
+
+        if (window.unityInstance) {
+          window.unityInstance.SendMessage("WalletManager", "OnNFTChecked", balance.toString());
+        }
 
       } catch (err) {
-        console.error(err);
-        return "";
+        console.error("Web3 error:", err);
+
+        if (window.unityInstance) {
+          window.unityInstance.SendMessage("WalletManager", "OnWalletDisconnected", "");
+        }
+      }
+    };
+
+    window.RestoreWalletSession = async function () {
+      if (typeof ethers === "undefined" || !window.ethereum) return;
+
+      try {
+        const accounts = await window.ethereum.request({ method: "eth_accounts" });
+
+        if (!accounts || accounts.length === 0) {
+          localStorage.removeItem("walletAddress");
+
+          if (window.unityInstance) {
+            window.unityInstance.SendMessage("WalletManager", "OnWalletDisconnected", "");
+          }
+
+          return;
+        }
+
+        const wallet = accounts[0];
+        localStorage.setItem("walletAddress", wallet);
+
+        if (window.unityInstance) {
+          window.unityInstance.SendMessage("WalletManager", "OnWalletConnected", wallet);
+        }
+
+        const balance = await window.checkNFT(wallet);
+
+        if (window.unityInstance) {
+          window.unityInstance.SendMessage("WalletManager", "OnNFTChecked", balance.toString());
+        }
+
+      } catch (err) {
+        console.error("Restore session error:", err);
+
+        if (window.unityInstance) {
+          window.unityInstance.SendMessage("WalletManager", "OnWalletDisconnected", "");
+        }
       }
     };
   </script>
@@ -91,9 +129,9 @@
     var canvas = document.querySelector("#unity-canvas");
 
     var config = {
-      dataUrl: "Build/Tower11 Web3 Final.data",
-      frameworkUrl: "Build/Tower11 Web3 Final.framework.js",
-      codeUrl: "Build/Tower11 Web3 Final.wasm",
+      dataUrl: "Build/Tower11_Web3_Final_Build.data",
+      frameworkUrl: "Build/Tower11_Web3_Final_Build.framework.js",
+      codeUrl: "Build/Tower11_Web3_Final_Build.wasm",
       streamingAssetsUrl: "StreamingAssets",
       companyName: "YourCompany",
       productName: "Tower 11",
@@ -101,7 +139,7 @@
     };
 
     var script = document.createElement("script");
-    script.src = "Build/Tower11 Web3 Final.loader.js";
+    script.src = "Build/Tower11_Web3_Final_Build.loader.js";
 
     script.onload = () => {
       createUnityInstance(canvas, config).then((instance) => {
