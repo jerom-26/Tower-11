@@ -198,13 +198,12 @@ public class LeaderboardManager : MonoBehaviour
 
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Leaderboard");
-            sb.AppendLine();
 
             for (int i = 0; i < data.rows.Length; i++)
             {
                 var e = data.rows[i];
                 string name = string.IsNullOrEmpty(e.username) ? "Player" : e.username;
+
                 sb.AppendLine($"{i + 1}. {name} - {e.best_score}");
             }
 
