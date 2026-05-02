@@ -4,7 +4,9 @@ Tower 11 is a fast-paced 2D arcade survival game built with Unity. Control a pla
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/a0167784-5baa-4d5b-93a0-8ae717a53841" width="700"/>
+  <img width="700"src="https://github.com/user-attachments/assets/a3bdeff9-6d0b-4b66-b021-ab06f1e3500f" />
 </p>
+
 
 ---
 
