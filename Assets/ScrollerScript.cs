@@ -103,7 +103,6 @@ public class ScrollerScript : MonoBehaviour
 
     void LoopIfNeeded(Transform a, Transform b)
     {
-        // when sprite a goes off screen, move it to the right of sprite b
         if (a.position.x <= b.position.x - tileWidth + buffer)
         {
             a.position = new Vector3(b.position.x + tileWidth - buffer, a.position.y, a.position.z);

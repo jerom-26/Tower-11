@@ -19,6 +19,7 @@ public class gameLogicScript : MonoBehaviour
     private bool isGameOver;
 
     public LeaderboardManager leaderboardManager;
+    public ScrollerScript scroller;
 
     [Header("Difficulty")]
     public int maxDifficultyScore = 50;
@@ -29,13 +30,11 @@ public class gameLogicScript : MonoBehaviour
         return Mathf.Clamp01((float)playerScore / maxDifficultyScore);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
        highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -62,17 +61,15 @@ public class gameLogicScript : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    public GameObject leaderboardPanel; // drag your LeaderboardPanel here in Inspector
+    public GameObject leaderboardPanel;
 
     public void gameOverScreen()
     {
         if (isGameOver) return;
         isGameOver = true;
 
-        // show Game Over UI
         gameOver.SetActive(true);
 
-        // stop spawners
         towerSpawnScript towerSpawner = FindFirstObjectByType<towerSpawnScript>();
         if (towerSpawner != null)
             towerSpawner.StopCollisionSpawning();
@@ -81,7 +78,9 @@ public class gameLogicScript : MonoBehaviour
         if (rocketSpawner != null)
             rocketSpawner.StopRocketSpawning();
 
-        // ✅ submit score
+        if (scroller != null)
+            scroller.enabled = false;
+
         leaderboardManager.SubmitScore(playerScore);
         ShowLeaderboard();
     }
