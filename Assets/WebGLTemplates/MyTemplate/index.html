@@ -126,29 +126,33 @@
   <canvas id="unity-canvas"></canvas>
 
   <script>
-    var canvas = document.querySelector("#unity-canvas");
+  var canvas = document.querySelector("#unity-canvas");
 
-    var config = {
-      dataUrl: "Build/Tower11_Web3_Final_Build.data",
-      frameworkUrl: "Build/Tower11_Web3_Final_Build.framework.js",
-      codeUrl: "Build/Tower11_Web3_Final_Build.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "YourCompany",
-      productName: "Tower 11",
-      productVersion: "1.0"
-    };
+  var config = {
+    dataUrl: "Build/{{{ DATA_FILENAME }}}",
+    frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+    codeUrl: "Build/{{{ CODE_FILENAME }}}",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "{{{ COMPANY_NAME }}}",
+    productName: "{{{ PRODUCT_NAME }}}",
+    productVersion: "{{{ PRODUCT_VERSION }}}"
+  };
 
-    var script = document.createElement("script");
-    script.src = "Build/Tower11_Web3_Final_Build.loader.js";
+  var script = document.createElement("script");
+  script.src = "Build/{{{ LOADER_FILENAME }}}";
 
-    script.onload = () => {
-      createUnityInstance(canvas, config).then((instance) => {
-        window.unityInstance = instance;
-        console.log("Unity Loaded");
-      });
-    };
+  script.onload = () => {
+  createUnityInstance(canvas, config).then((instance) => {
+    window.unityInstance = instance;
+    console.log("Unity Loaded");
 
-    document.body.appendChild(script);
-  </script>
+    if (typeof window.RestoreWalletSession === "function") {
+      window.RestoreWalletSession();
+    }
+  });
+};
+
+  document.body.appendChild(script);
+</script>
 </body>
 </html>
