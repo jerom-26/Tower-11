@@ -142,7 +142,7 @@ public class LeaderboardManager : MonoBehaviour
         req.SetRequestHeader("apikey", apiKey);
         req.SetRequestHeader("Authorization", $"Bearer {apiKey}");
         req.SetRequestHeader("Content-Type", "application/json");
-        req.SetRequestHeader("Prefer", "resolution=merge-duplicates,return=representation"); // optional
+        req.SetRequestHeader("Prefer", "resolution=merge-duplicates,return=representation"); 
 
         yield return req.SendWebRequest();
 
@@ -204,7 +204,7 @@ public class LeaderboardManager : MonoBehaviour
                 var e = data.rows[i];
                 string name = string.IsNullOrEmpty(e.username) ? "Player" : e.username;
 
-                sb.AppendLine($"{i + 1}. {name} - {e.best_score}");
+                sb.AppendLine($"{(i + 1).ToString().PadLeft(2)}  {name.PadRight(12)}  {e.best_score.ToString().PadLeft(3)}");
             }
 
             leaderboardText.text = sb.ToString();
