@@ -150,7 +150,6 @@ public class WalletManager : MonoBehaviour
 
     public void OnWalletDisconnected(string _)
     {
-        Debug.Log("Wallet disconnected or no session");
         currentWallet = "";
 
         if (web3Manager != null)
