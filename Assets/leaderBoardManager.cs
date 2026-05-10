@@ -134,7 +134,6 @@ public class LeaderboardManager : MonoBehaviour
 
         string url = $"{supabaseUrl}/rest/v1/leaderboard?on_conflict=username";
         string json = $"{{\"username\":\"{username}\",\"best_score\":{score}}}";
-        Debug.Log($"POST {url}  body={json}");
 
         var req = new UnityWebRequest(url, "POST");
         req.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json));
@@ -148,11 +147,11 @@ public class LeaderboardManager : MonoBehaviour
 
         if (req.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("✅ Score submitted to Supabase: " + req.downloadHandler.text);
+            Debug.Log(" Score submitted to Supabase: " + req.downloadHandler.text);
         }
         else
         {
-            Debug.LogError($"❌ Submit Error: {req.responseCode} {req.error} | {req.downloadHandler.text}");
+            Debug.LogError($" Submit Error: {req.responseCode} {req.error} | {req.downloadHandler.text}");
         }
     }
 
@@ -176,19 +175,18 @@ public class LeaderboardManager : MonoBehaviour
 
         if (req.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError($"❌ Leaderboard Error: {req.responseCode} {req.error} | {req.downloadHandler.text}");
+            Debug.LogError($" Leaderboard Error: {req.responseCode} {req.error} | {req.downloadHandler.text}");
             yield break;
         }
 
         string raw = req.downloadHandler.text;
-        Debug.Log("Leaderboard raw JSON: " + raw);
 
         string wrapped = "{\"rows\":" + raw + "}";
         LeaderboardWrapper data = JsonUtility.FromJson<LeaderboardWrapper>(wrapped);
 
         if (data == null || data.rows == null)
         {
-            Debug.LogWarning("⚠️ Leaderboard parse returned null. Showing empty leaderboard.");
+            Debug.LogWarning(" Leaderboard parse returned null. Showing empty leaderboard.");
             if (leaderboardText != null)
                 leaderboardText.text = "Leaderboard\n\n(No entries)";
             yield break;
@@ -208,8 +206,6 @@ public class LeaderboardManager : MonoBehaviour
             }
 
             leaderboardText.text = sb.ToString();
-            Debug.Log("Formatted Leaderboard:\n" + sb.ToString());
-
         }
     }
         
