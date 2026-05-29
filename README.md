@@ -15,7 +15,7 @@ Tower 11 is a fast-paced 2D arcade survival game built with Unity. Control a pla
 | Version | Link |
 |---------|------|
 | Standard | https://jerom001.itch.io/tower-11 |
-| Web3 (Experimental) | https://jerom001.github.io/Tower-11 |
+| Web3 (Experimental) | https://jerom-26.github.io/Tower-11 |
 
 ---
 
@@ -77,6 +77,6 @@ The Web3 version adds wallet-based identity and NFT-gated content on top of the 
 
 **Jerom Jiju** — Game Developer / Software Developer
 
-- GitHub: https://github.com/jerom001
+- GitHub: https://github.com/jerom-26
 - Itch.io: https://jerom001.itch.io
 - LinkedIn: https://linkedin.com/in/jerom-jiju26
