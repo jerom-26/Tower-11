@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class gameLogicScript : MonoBehaviour
 {
     public int playerScore;
+
+    [Header("Score UI")]
     public Text scoreUiText;
+    public Text highScoreText;
+    public Text finalScoreText;
+
+    [Header("Game Over")]
     public GameObject gameOver;
+    public GameObject leaderboardPanel;
+
+    [Header("Effects")]
     public GameObject explosionEffect;
     public GameObject rocketLauncherPrefab;
-    public bool rocketLauncher = true;
     public Transform rocketSpawnPosition;
-    public Text highScoreText;
-    public int highScore;
     public AudioSource scoreSound;
+
+
+    public bool rocketLauncher = true;
+    public int highScore;
+
     private bool isGameOver;
 
     public LeaderboardManager leaderboardManager;
@@ -57,18 +69,24 @@ public class gameLogicScript : MonoBehaviour
  
     public void playAgain()
     {
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1.0f;
     }
 
-    public GameObject leaderboardPanel;
-
     public void gameOverScreen()
     {
+
         if (isGameOver) return;
         isGameOver = true;
 
         gameOver.SetActive(true);
+
+        scoreUiText.gameObject.SetActive(false);
+        gameOver.SetActive(true);
+
+        finalScoreText.text =
+        $"SCORE <color=#FF79C9>{playerScore}</color>";
 
         towerSpawnScript towerSpawner = FindFirstObjectByType<towerSpawnScript>();
         if (towerSpawner != null)
@@ -81,8 +99,12 @@ public class gameLogicScript : MonoBehaviour
         if (scroller != null)
             scroller.enabled = false;
 
-        leaderboardManager.SubmitScore(playerScore);
-        ShowLeaderboard();
+        if (leaderboardManager != null)
+        {
+            leaderboardManager.SubmitScore(playerScore);
+            ShowLeaderboard();
+        }
+
     }
 
     public void ShowLeaderboard()
