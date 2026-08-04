@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 37a89e6be8a3f1b468b5c98de84bf0c5
+guid: 10bdee63ecaae0a42953e828bad866eb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8156702442312907050
-    second: T11PLane_0
+      213: 8287873616420496286
+    second: clouds_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: T11PLane_0
+      name: clouds_0
       rect:
         serializedVersion: 2
-        x: 11
+        x: 0
         y: 0
-        width: 486
-        height: 1024
+        width: 1672
+        height: 941
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a293f9cb7ad623170800000000000000
-      internalID: 8156702442312907050
+      spriteID: e936312a421740370800000000000000
+      internalID: 8287873616420496286
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      T11PLane_0: 8156702442312907050
+      clouds_0: 8287873616420496286
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
