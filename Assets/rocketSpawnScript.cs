@@ -4,65 +4,116 @@ using UnityEngine;
 
 public class rocketSpawnScript : MonoBehaviour
 {
+    [Header("References")]
     public GameObject rocketLauncherPrefab;
     public gameLogicScript gameLogic;
-    public float rocketSpawnRate = 2f;
-    private float timer = 0f;
-
-    public float delay = 3f;
-    private bool canSpawnRockets = false;   // start OFF
-
-    public Transform player; // assign airplane in inspector
+    public Transform player;
     public AudioSource spawnSound;
 
-    void Start()
-    {
-        gameLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<gameLogicScript>();
-        Invoke(nameof(EnableSpawning), delay); // enable later (not spawn)
-    }
+    [Header("Spawn Settings")]
+    public float rocketSpawnRate = 2f;
+    public float delay = 3f;
 
-    void EnableSpawning()
+    [Range(0f, 1f)]
+    public float randomFireChance = 0.25f;
+
+    public float altitudeThreshold = 3f;
+
+    private float timer = 0f;
+    private bool canSpawnRockets = false;
+
+    private void Start()
     {
-        canSpawnRockets = true;
+        GameObject logicObject =
+                GameObject.FindGameObjectWithTag("Logic");
+        if (logicObject != null)
+        {
+            gameLogic =
+                logicObject.GetComponent<gameLogicScript>();
+        }
+
+        canSpawnRockets = false;
         timer = 0f;
+
+        Invoke(nameof(EnableSpawning), delay);
     }
 
-    void Update()
+    private void Update()
     {
         if (!canSpawnRockets)
+        {
             return;
+        }
+        if (gameLogic != null && !gameLogic.IsPlaying)
+        {
+            return;
+        }
 
         timer += Time.deltaTime;
 
-        if (timer >= rocketSpawnRate)
+        if (timer < rocketSpawnRate)
         {
-            bool shouldFire = false;
+            return;
+        }
+        timer -= rocketSpawnRate;
 
-            // Condition 1: Player altitude
-            if (player != null && player.position.y > 3f)
-                shouldFire = true;
+        bool playerIsHigh =
+            player != null &&
+            player.position.y > altitudeThreshold;
 
-            // Condition 2: Random chance
-            if (Random.value < 0.25f)
-                shouldFire = true;
+        bool passedRandomChance =
+            Random.value < randomFireChance;
 
-            if (shouldFire)
-                SpawnRocket();
-
-            timer = 0f;
+        if (playerIsHigh || passedRandomChance)
+        {
+            SpawnRocket();
         }
     }
 
-    void SpawnRocket()
+    private void EnableSpawning()
     {
-        Instantiate(rocketLauncherPrefab, transform.position, Quaternion.identity);
+        if (gameLogic != null && !gameLogic.IsPlaying)
+        {
+            return;
+        }
+        canSpawnRockets = true;
+        timer = 0f;
+    }
+    private void SpawnRocket()
+    {
+        GameObject spawnedRocket = Instantiate(rocketLauncherPrefab, transform.position, Quaternion.identity);
+        RocketMovement rocketMovement =
+            spawnedRocket.GetComponent<RocketMovement>();
+
+        if (rocketMovement == null)
+        {
+            rocketMovement =
+                spawnedRocket.GetComponentInChildren<RocketMovement>();
+        }
+        if (rocketMovement != null)
+        {
+            rocketMovement.player = player;
+            rocketMovement.scoreOfGame = gameLogic;
+        }
+        else
+        {
+            Debug.LogWarning(
+                "The spawned rocket does not contain RocketMovement.",
+                spawnedRocket
+            );
+        }
 
         if (spawnSound != null)
+        {
             spawnSound.Play();
+        }
     }
 
     public void StopRocketSpawning()
     {
         canSpawnRockets = false;
+        timer = 0f;
+
+        CancelInvoke(nameof(EnableSpawning));
     }
 }

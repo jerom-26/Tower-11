@@ -11,18 +11,36 @@ public class TowerBehaviour : MonoBehaviour
     [SerializeField] private float minHeight = 0.8f;
     [SerializeField] private float maxHeight = 1.6f;
 
+    [Header("References")]
+    [SerializeField] private gameLogicScript gameLogic;
+
+    private SpriteRenderer spriteRenderer;
+
     private PooledObject pooledObject;
     private Rigidbody2D rb;
+    private Vector3 originalScale;
 
     private void Awake()
     {
-        // Cache references ONCE (important for performance)
         pooledObject = GetComponent<PooledObject>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalScale = transform.localScale;
+
+        if (gameLogic == null)
+        {
+            GameObject logicObject =
+                GameObject.FindGameObjectWithTag("Logic");
+
+            if (logicObject != null)
+            {
+                gameLogic =
+                    logicObject.GetComponent<gameLogicScript>();
+            }
+        }
+
     }
 
-    // Called EVERY time the tower is reused from the pool.
-    // This replaces "Start()" logic for pooled objects.
     public void OnSpawned()
     {
         // Reset physics state 
@@ -32,24 +50,41 @@ public class TowerBehaviour : MonoBehaviour
             rb.angularVelocity = 0f;
         }
 
-        // HARD RESET so pooling never keeps an old stretched value
-        transform.localScale = Vector3.one;
+        float heightMultiplier = Random.Range(minHeight, maxHeight);
 
-        // then random height
-        float h = Random.Range(minHeight, maxHeight);
-        transform.localScale = new Vector3(1f, h, 1f);
 
+        transform.localScale = new Vector3(
+            originalScale.x,
+            originalScale.y * heightMultiplier,
+            originalScale.z
+        );
+        
     }
 
     private void Update()
     {
-        // Move tower left every frame
+        // Stops existing towers before gameplay, while paused,
+        // and after game over.
+        if (gameLogic == null || !gameLogic.IsPlaying)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0f;
+            }
+
+            return;
+        }
+
         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
-        // Off-screen check → return to pool (NOT Destroy)
-        if (transform.position.x < -15f) // adjust for your camera
+        // Off-screen check and return to pool (NOT Destroy)
+        if (transform.position.x < -15f) 
         {
-            pooledObject.ReturnToPool();
+            if (pooledObject != null)
+            {
+                pooledObject.ReturnToPool();
+            }
         }
     }
 

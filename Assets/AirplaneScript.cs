@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AirplaneScript : MonoBehaviour
@@ -7,6 +5,7 @@ public class AirplaneScript : MonoBehaviour
     [Header("Movement")]
     public Rigidbody2D myRigidBody;
     public float planeVelocity = 7.5f;
+    public float activeGravityScale = 1.8f;
     public float noFlyZoneUpper = 8f;
     public float noFlyZoneLower = -4f;
 
@@ -14,10 +13,13 @@ public class AirplaneScript : MonoBehaviour
     public float boundsPadding = 0.15f;
 
     [Header("Tilt Settings")]
-    public float tiltMultiplier = 6f;     // how fast angle reacts to velocity
-    public float maxUpAngle = 30f;        // degrees
-    public float maxDownAngle = -60f;     // degrees
-    public float tiltSmooth = 8f;         // how smoothly to rotate
+    public float tiltMultiplier = 6f;
+    public float maxUpAngle = 30f;
+    public float maxDownAngle = -60f;
+    public float tiltSmooth = 8f;
+
+    [Header("Optional Visual")]
+    public Transform planeVisual;
 
     [Header("Game Logic")]
     public gameLogicScript gameLogic;
@@ -26,104 +28,196 @@ public class AirplaneScript : MonoBehaviour
     public GameObject explosionEffect;
     public AudioSource explosionSound;
 
-    bool planeAlive = true;
-    bool gameStarted = false;
+    private bool planeAlive = true;
+    private bool gameplayEnabled = false;
+    private bool flapRequested = false;
 
-    void Start()
+    private void Awake()
     {
-        gameLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<gameLogicScript>();
-
         if (myRigidBody == null)
+        {
             myRigidBody = GetComponent<Rigidbody2D>();
+        }
 
-        // Lighter feel
-        myRigidBody.gravityScale = 1.8f;
+        if (planeVisual == null)
+        {
+            planeVisual = transform;
+        }
+
+        if (myRigidBody != null)
+        {
+            myRigidBody.gravityScale = 0f;
+            myRigidBody.linearVelocity = Vector2.zero;
+            myRigidBody.angularVelocity = 0f;
+
+            myRigidBody.interpolation = RigidbodyInterpolation2D.Interpolate;
+        }
     }
 
-    void Update()
+    private void Start()
     {
-        if (!planeAlive) return;
-
-        if (!gameStarted)
+        if (gameLogic == null)
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            GameObject logicObject = GameObject.FindGameObjectWithTag("Logic");
+
+            if (logicObject != null)
             {
-                gameStarted = true;
-                myRigidBody.gravityScale = 1.8f;
-                Flap();        // initial jump
+                gameLogic = logicObject.GetComponent<gameLogicScript>();
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (!planeAlive || !gameplayEnabled)
+        {
             return;
         }
 
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
-            Flap();
+            flapRequested = true;
         }
 
-        // Apply tilt based on current vertical speed
         ApplyTilt();
     }
 
-    void LateUpdate()
+    private void FixedUpdate()
     {
-        if (!planeAlive) return;
-        if (!gameStarted) return;
+        if (!planeAlive || !gameplayEnabled || myRigidBody == null)
+        {
+            return;
+        }
+
+        if (flapRequested)
+        {
+            Flap();
+            flapRequested = false;
+        }
 
         ClampToBounds();
     }
 
-    void ClampToBounds()
+    public void BeginGame()
     {
-        Vector3 pos = transform.position;
+        if (!planeAlive || gameplayEnabled || myRigidBody == null)
+        {
+            return;
+        }
+
+        gameplayEnabled = true;
+        flapRequested = false;
+
+        myRigidBody.linearVelocity = Vector2.zero;
+        myRigidBody.angularVelocity = 0f;
+        myRigidBody.gravityScale = activeGravityScale;
+
+        Flap();
+    }
+
+    public void DisableGameplay()
+    {
+        gameplayEnabled = false;
+        flapRequested = false;
+
+        if (myRigidBody == null)
+        {
+            return;
+        }
+
+        myRigidBody.gravityScale = 0f;
+        myRigidBody.linearVelocity = Vector2.zero;
+        myRigidBody.angularVelocity = 0f;
+    }
+
+    private void Flap()
+    {
+        Vector2 velocity = myRigidBody.linearVelocity;
+
+        velocity.y = planeVelocity;
+
+        myRigidBody.linearVelocity = velocity;
+    }
+
+    private void ClampToBounds()
+    {
+        Vector2 pos = myRigidBody.position;
 
         float maxY = noFlyZoneUpper - boundsPadding;
 
-        // Clamp only the TOP
         if (pos.y > maxY)
         {
             pos.y = maxY;
-            transform.position = pos;
+
+            myRigidBody.position = pos;
+
+            if (myRigidBody.linearVelocity.y > 0f)
+            {
+                Vector2 velocity = myRigidBody.linearVelocity;
+                velocity.y = 0f;
+                myRigidBody.linearVelocity = velocity;
+            }
         }
 
-        // BOTTOM = death
         if (pos.y < noFlyZoneLower)
         {
             Die();
         }
     }
 
-
-    void Flap()
+    private void ApplyTilt()
     {
-        // reset vertical speed then push up -> snappy control
-        myRigidBody.linearVelocity = new Vector2(myRigidBody.linearVelocity.x, 0f);
-        myRigidBody.linearVelocity += Vector2.up * planeVelocity;
-    }
+        if (myRigidBody == null || planeVisual == null)
+        {
+            return;
+        }
 
-    void ApplyTilt()
-    {
-        // Convert vertical velocity into an angle
-        float targetAngle = myRigidBody.linearVelocity.y * tiltMultiplier;
+        float targetAngle =
+            myRigidBody.linearVelocity.y * tiltMultiplier;
 
-        // Clamp so it never goes crazy
-        targetAngle = Mathf.Clamp(targetAngle, maxDownAngle, maxUpAngle);
+        targetAngle =
+            Mathf.Clamp(targetAngle, maxDownAngle, maxUpAngle);
 
-        // Smoothly rotate towards that angle
-        Quaternion desiredRotation = Quaternion.Euler(0f, 0f, targetAngle);
-        transform.rotation = Quaternion.Lerp(
-            transform.rotation,
+        Quaternion desiredRotation =
+            Quaternion.Euler(0f, 0f, targetAngle);
+
+        planeVisual.rotation = Quaternion.Slerp(
+            planeVisual.rotation,
             desiredRotation,
             tiltSmooth * Time.deltaTime
         );
     }
 
-    void Die()
+    public void KillPlane()
     {
+        Die();
+    }
+
+    private void Die()
+    {
+        if (!planeAlive)
+        {
+            return;
+        }
+
         planeAlive = false;
+        gameplayEnabled = false;
+        flapRequested = false;
+
+        if (myRigidBody != null)
+        {
+            myRigidBody.linearVelocity = Vector2.zero;
+            myRigidBody.angularVelocity = 0f;
+            myRigidBody.gravityScale = 0f;
+        }
 
         if (explosionEffect != null)
         {
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Instantiate(
+                explosionEffect,
+                transform.position,
+                Quaternion.identity
+            );
         }
 
         if (explosionSound != null)
@@ -136,20 +230,43 @@ public class AirplaneScript : MonoBehaviour
             gameLogic.gameOverScreen();
         }
 
-        GetComponent<SpriteRenderer>().enabled = false;
+        SpriteRenderer spriteRenderer =
+            GetComponent<SpriteRenderer>();
 
-        if (explosionSound != null && explosionSound.clip != null)
-            Destroy(gameObject, explosionSound.clip.length);
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = false;
+        }
+
+        Collider2D planeCollider =
+            GetComponent<Collider2D>();
+
+        if (planeCollider != null)
+        {
+            planeCollider.enabled = false;
+        }
+
+        if (explosionSound != null)
+        {
+            Destroy(gameObject, 2f);
+        }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!planeAlive) return;
+        if (!planeAlive || !gameplayEnabled)
+        {
+            return;
+        }
 
-        if (collision.gameObject.CompareTag("Tower") ||
-            collision.gameObject.CompareTag("Rocket"))
+        if (
+            collision.gameObject.CompareTag("Tower") ||
+            collision.gameObject.CompareTag("Rocket")
+        )
         {
             Die();
         }

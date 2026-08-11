@@ -3,9 +3,9 @@ using UnityEngine;
 public class RocketMovement : MonoBehaviour
 {
     public Transform player;
-    public float speed = 5f;
+    public float speed = 6f;
     public float predictionTime = 0.5f;
-    public float lifeTime = 3f;
+    public float lifeTime = 8f;
     private Vector2 moveDirection;
 
     public gameLogicScript scoreOfGame;
@@ -14,6 +14,11 @@ public class RocketMovement : MonoBehaviour
 
     public bool rocketCollisionMove = true;
 
+    [Header("Chase Settings")]
+    public float homingDuration = 1.5f;
+    public float turnSpeed = 90f;
+
+    private float homingTimer;
     // Rocket States
     public enum RocketState { Chase, Wait, Decoy }
     public RocketState currentState;
@@ -21,6 +26,7 @@ public class RocketMovement : MonoBehaviour
 
     void Start()
     {
+        homingTimer = homingDuration;
         scoreOfGame = GameObject.FindGameObjectWithTag("Logic").GetComponent<gameLogicScript>();
 
         if (player != null)
@@ -36,7 +42,7 @@ public class RocketMovement : MonoBehaviour
             else currentState = RocketState.Decoy;   // 20% chance
         }
 
-        Destroy(gameObject, lifeTime); // auto destroy if no hit
+        Destroy(gameObject, lifeTime);
     }
 
     void Update()
@@ -54,25 +60,60 @@ public class RocketMovement : MonoBehaviour
 
     void HandleChase()
     {
-        if (player == null) return;
+        if (player == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        // Calculate desired direction toward player
-        Vector2 targetDir = ((Vector2)player.position - (Vector2)transform.position).normalized;
+        // Track the player only for a limited period.
+        if (homingTimer > 0f)
+        {
+            homingTimer -= Time.deltaTime;
 
-        // Smoothly rotate current moveDirection toward targetDir
-        moveDirection = Vector2.Lerp(moveDirection, targetDir, 0.05f).normalized;
+            Vector2 targetDirection =
+                ((Vector2)player.position -
+                 (Vector2)transform.position).normalized;
 
-        // Keep moving forward with momentum
-        transform.position += (Vector3)moveDirection * speed * Time.deltaTime;
+            float currentAngle =
+                Mathf.Atan2(moveDirection.y, moveDirection.x) *
+                Mathf.Rad2Deg;
 
-        // Destroy if rocket leaves play area (slightly outside camera)
-        if (transform.position.x < -10f || transform.position.x > 10f ||
-            transform.position.y < -6f || transform.position.y > 6f)
+            float targetAngle =
+                Mathf.Atan2(targetDirection.y, targetDirection.x) *
+                Mathf.Rad2Deg;
+
+            float newAngle = Mathf.MoveTowardsAngle(
+                currentAngle,
+                targetAngle,
+                turnSpeed * Time.deltaTime
+            );
+
+            moveDirection = new Vector2(
+                Mathf.Cos(newAngle * Mathf.Deg2Rad),
+                Mathf.Sin(newAngle * Mathf.Deg2Rad)
+            );
+        }
+
+        // After the timer finishes, it continues straight.
+        transform.position +=
+            (Vector3)moveDirection * speed * Time.deltaTime;
+
+        // The rocket cannot turn around after passing the player.
+        if (transform.position.x < player.position.x - 1.5f)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (transform.position.x < -10f ||
+            transform.position.x > 10f ||
+            transform.position.y < -6f ||
+            transform.position.y > 6f)
         {
             Destroy(gameObject);
         }
     }
-
 
     void HandleWait()
     {
@@ -96,24 +137,21 @@ public class RocketMovement : MonoBehaviour
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
             }
 
-            // Play sound (detach so it isn�t cut off when rocket is destroyed)
-            if (rocketSound != null)
+            if (rocketSound != null && rocketSound.clip != null)
             {
-                rocketSound.transform.parent = null;
-                rocketSound.Play();
-                Destroy(rocketSound.gameObject, rocketSound.clip.length);
+                AudioSource.PlayClipAtPoint(
+                    rocketSound.clip,
+                    transform.position,
+                    rocketSound.volume
+                );
             }
 
-            // Trigger game over
             scoreOfGame.gameOverScreen();
 
-            // Stop spawner
             StopRocketSpawning();
 
-            // Destroy player plane
             Destroy(collision.gameObject);
 
-            // Destroy rocket
             Destroy(gameObject);
         }
     }

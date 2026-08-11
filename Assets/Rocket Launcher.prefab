@@ -9806,13 +9806,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8664685419424086220, guid: e5a964c169237f34b9dc5842d8fa033c, type: 3}
-  speed: 5
+  speed: 6
   predictionTime: 0.5
-  lifeTime: 3
+  lifeTime: 8
   scoreOfGame: {fileID: 0}
   rocketSound: {fileID: 6354791167472381954}
   explosionEffect: {fileID: 100000, guid: cf334c2fa68e8414087d035e6c17bec3, type: 3}
   rocketCollisionMove: 1
+  homingDuration: 1.5
+  turnSpeed: 90
   currentState: 0
 --- !u!61 &6967547417985689525
 BoxCollider2D:

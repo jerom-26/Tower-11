@@ -12,72 +12,127 @@ public class towerSpawnScript : MonoBehaviour
     [Header("Spawn Timing")]
     [SerializeField] private float delay = 2f;
 
-    private float timer = 0f;
-    private bool canSpawnTowers = false;
-
     [Header("Difficulty Scaling")]
     [SerializeField] private float easySpawnRate = 2f;
     [SerializeField] private float hardSpawnRate = 0.9f;
 
-    private gameLogicScript gameLogic;
+    [Header("References")]
+    [SerializeField] private gameLogicScript gameLogic;
+
+    private float timer = 0f;
+    private bool canSpawnTowers = false;
     void Start()
     {
-        gameLogic = GameObject.FindGameObjectWithTag("Logic").GetComponent<gameLogicScript>();
+        if (gameLogic == null)
+        {
+            GameObject logicObject =
+                GameObject.FindGameObjectWithTag("Logic");
+
+            if (logicObject != null)
+            {
+                gameLogic =
+                    logicObject.GetComponent<gameLogicScript>();
+            }
+        }
 
         timer = 0f;
         canSpawnTowers = false;
+        collisionSpawnStop = true;
 
-        // delay prevents heavy spawn burst right at game start
         Invoke(nameof(EnableTowerSpawning), delay);
     }
 
-    void EnableTowerSpawning()
+    private void EnableTowerSpawning()
     {
+        if (gameLogic == null || !gameLogic.IsPlaying)
+        {
+            return;
+        }
+
         canSpawnTowers = true;
         timer = 0f;
     }
 
-    void Update()
+    private void Update()
     {
-        if (!canSpawnTowers) return;
-
-        if (!collisionSpawnStop) // stop spawning if false
+        if (gameLogic == null || !gameLogic.IsPlaying)
+        {
             return;
+        }
+
+        if (!canSpawnTowers || !collisionSpawnStop)
+        {
+            return;
+        }
 
         timer += Time.deltaTime;
 
-        float difficulty01 = 0f;
-        if (gameLogic != null)
-            difficulty01 = gameLogic.GetDifficulty01();
+        float difficulty =
+            gameLogic.GetDifficulty01();
 
-        float currentSpawnRate = Mathf.Lerp(easySpawnRate, hardSpawnRate, difficulty01);
+        float currentSpawnRate = Mathf.Lerp(
+            easySpawnRate,
+            hardSpawnRate,
+            difficulty
+        );
 
         if (timer >= currentSpawnRate)
         {
-            Spawntower();
+            SpawnTower();
             timer = 0f;
         }
 
     }
 
-
-    void Spawntower()
+    private void SpawnTower()
     {
-        var obj = towerPool.Get(transform.position, transform.rotation);
-        if (obj == null) return;
+        if (towerPool == null)
+        {
+            Debug.LogError(
+                "Tower Pool is not assigned.",
+                this
+            );
 
-        // Link object -> pool once, so it can return itself later
-        var pooled = obj.GetComponent<PooledObject>();
-        if (pooled != null) pooled.SetPool(towerPool);
+            return;
+        }
 
-        //Reset / randomize tower state each time its reused
-        var tower = obj.GetComponent<TowerBehaviour>();
-        if (tower != null) tower.OnSpawned();
+        GameObject towerObject = towerPool.Get(
+            transform.position,
+            transform.rotation
+        );
+
+        if (towerObject == null)
+        {
+            return;
+        }
+
+        PooledObject pooled =
+            towerObject.GetComponent<PooledObject>();
+
+        if (pooled != null)
+        {
+            pooled.SetPool(towerPool);
+        }
+
+        TowerBehaviour tower =
+            towerObject.GetComponent<TowerBehaviour>();
+
+        if (tower != null)
+        {
+            tower.OnSpawned();
+        }
     }
 
-    // Call this when game is over
     public void StopCollisionSpawning()
     {
         collisionSpawnStop = false;
+        canSpawnTowers = false;
+        timer = 0f;
+
+        CancelInvoke(nameof(EnableTowerSpawning));
+    }
+    private void OnDisable()
+    {
+        CancelInvoke(nameof(EnableTowerSpawning));
     }
 }

@@ -134,12 +134,12 @@ TextureImporter:
       name: HUDPixel_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 623
-        width: 717
-        height: 401
+        x: 53
+        y: 664
+        width: 669
+        height: 295
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -249,7 +249,7 @@ TextureImporter:
         width: 448
         height: 221
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 36, y: 41, z: 34, w: 30}
       customData: 
       outline: []

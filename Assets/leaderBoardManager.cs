@@ -3,17 +3,32 @@ using UnityEngine.Networking;
 using TMPro;
 using System.Collections;
 using System.Text;
+using UnityEngine.UI;
 
 public class LeaderboardManager : MonoBehaviour
 {
     [Header("Supabase")]
-    [SerializeField] string supabaseUrl = "https://sfteyxrwvxxzdnxiublf.supabase.co";
     [SerializeField]
-    string apiKey =
-        "sb_publishable_Z0Y4qpWTIM7bBSJ6L2xhBg_UkmKqqcy";
+    private string supabaseUrl = "https://sfteyxrwvxxzdnxiublf.supabase.co";
 
-    [Header("Optional UI")]
-    [SerializeField] TMP_Text leaderboardText;
+    [SerializeField]
+    private string publishableKey =
+        "YOUR_PUBLISHABLE_KEY";
+
+    [Header("Leaderboard UI")]
+    [SerializeField]
+    private TMP_Text leaderboardText;
+
+    [Header("Current Player UI")]
+    [SerializeField]
+    private Text bestScoreText;
+
+    [SerializeField]
+    private TMP_Text usernameText;
+
+
+    private const string UsernameKey = "username";
+    private const string BestScoreKey = "best_score";
 
     [System.Serializable]
     public class LeaderboardEntry
@@ -28,185 +43,543 @@ public class LeaderboardManager : MonoBehaviour
         public LeaderboardEntry[] rows;
     }
 
-    public void SubmitScore(int score)
+    private void Start()
     {
-        string username = PlayerPrefs.GetString("username", "");
-        username = username.Trim().ToLowerInvariant();
-
-        PlayerPrefs.SetString("username", username);
-        PlayerPrefs.Save();
-
-        string error = ValidateUsernameRules(username);
-
-        if (error != null)
-        {
-            Debug.Log(error);
-            return;
-        }
-
-        StartCoroutine(SubmitIfHigher(username, score));
+        RefreshPlayerData();
     }
 
-    private string ValidateUsernameRules(string username)
+    private void AddSupabaseHeaders(UnityWebRequest request)
     {
-        if (string.IsNullOrEmpty(username))
-        {
-            return "Username cannot be empty";
-        }
-
-        if (username.Length < 3 || username.Length > 20)
-        {
-            return "Username must be between 3 and 20 characters long.";
-        }
-
-        for (int i = 0; i < username.Length; i++)
-        {
-            char c = username[i];
-
-            bool isLowerLetter = (c >= 'a' && c <= 'z');
-            bool isDigit = (c >= '0' && c <= '9');
-            bool isUnderscore = (c == '_');
-
-            if (!(isLowerLetter || isDigit || isUnderscore))
-                return "Username can only contain lowercase letters (a-z), numbers (0-9), or underscore (_).";
-        }
-
-        return null;
-
+        request.SetRequestHeader("apikey", publishableKey);
     }
-     IEnumerator SubmitIfHigher(string username, int score)
+
+
+    public void RefreshPlayerData()
     {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        StartCoroutine(RefreshPlayerDataRoutine());
+    }
+
+    private IEnumerator RefreshPlayerDataRoutine()
+    {
+        string username = GetNormalizedUsername();
+
+        if (!string.IsNullOrEmpty(username))
         {
-            Debug.LogError("No internet connection");
-            yield break;
+            yield return StartCoroutine(
+                SyncCurrentPlayerBest(username)
+            );
         }
-
-        string url = $"{supabaseUrl}/rest/v1/leaderboard?select=best_score&username=eq.{username}&limit=1";
-        Debug.Log($"GET {url}");
-
-        var req = UnityWebRequest.Get(url);
-        req.downloadHandler = new DownloadHandlerBuffer();
-        req.SetRequestHeader("apikey", apiKey);
-        req.SetRequestHeader("Authorization", $"Bearer {apiKey}");
-
-
-        yield return req.SendWebRequest();
-
-        if (req.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError($"❌ BestScore GET failed: {req.responseCode} {req.error} | {req.downloadHandler.text}");
-            yield break;
-        }
-
-
-        string raw = req.downloadHandler.text;
-        string wrapped = "{\"rows\":" + raw + "}";
-        LeaderboardWrapper data = JsonUtility.FromJson<LeaderboardWrapper>(wrapped);
-
-        int existingBest = -1;
-        if (data != null && data.rows != null && data.rows.Length > 0) 
-        {
-            existingBest = data.rows[0].best_score;
-        }
-
-        if (score <= existingBest)
-        {
-            Debug.Log($"Not uploading. score={score} <= existingBest={existingBest}");
-            yield break;
-        }
-        Debug.Log($"Uploading new best. score={score} > existingBest={existingBest}");  
-        yield return StartCoroutine(PostScore(username, score));
 
         yield return StartCoroutine(GetLeaderboard());
     }
 
 
-    public void LoadLeaderboard() => StartCoroutine(GetLeaderboard());
-
-    IEnumerator PostScore(string username, int score)
+    public void SubmitScore(int score)
     {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        string username = GetNormalizedUsername();
+
+        string error = ValidateUsernameRules(username);
+
+        if (error != null)
         {
-            Debug.LogError("No internet connection");
-            yield break;
+            Debug.LogWarning(error);
+            return;
         }
 
-        string url = $"{supabaseUrl}/rest/v1/leaderboard?on_conflict=username";
-        string json = $"{{\"username\":\"{username}\",\"best_score\":{score}}}";
-
-        var req = new UnityWebRequest(url, "POST");
-        req.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json));
-        req.downloadHandler = new DownloadHandlerBuffer();
-        req.SetRequestHeader("apikey", apiKey);
-        req.SetRequestHeader("Authorization", $"Bearer {apiKey}");
-        req.SetRequestHeader("Content-Type", "application/json");
-        req.SetRequestHeader("Prefer", "resolution=merge-duplicates,return=representation"); 
-
-        yield return req.SendWebRequest();
-
-        if (req.result == UnityWebRequest.Result.Success)
-        {
-            Debug.Log(" Score submitted to Supabase: " + req.downloadHandler.text);
-        }
-        else
-        {
-            Debug.LogError($" Submit Error: {req.responseCode} {req.error} | {req.downloadHandler.text}");
-        }
+        StartCoroutine(
+            SubmitIfHigher(username, score)
+        );
     }
 
-    IEnumerator GetLeaderboard()
+    private IEnumerator SubmitIfHigher(
+        string username,
+        int score
+    )
     {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        if (Application.internetReachability ==
+            NetworkReachability.NotReachable)
         {
             Debug.LogError("No internet connection");
             yield break;
         }
 
-        string url = $"{supabaseUrl}/rest/v1/leaderboard?select=username,best_score&order=best_score.desc&limit=10";
-        Debug.Log($"GET {url}");
+        string url =
+            $"{supabaseUrl}/rest/v1/leaderboard" +
+            $"?select=best_score" +
+            $"&username=eq.{UnityWebRequest.EscapeURL(username)}" +
+            $"&limit=1";
 
-        var req = UnityWebRequest.Get(url);
-        req.downloadHandler = new DownloadHandlerBuffer();
-        req.SetRequestHeader("apikey", apiKey);
-        req.SetRequestHeader("Authorization", $"Bearer {apiKey}");
+        using UnityWebRequest req =
+            UnityWebRequest.Get(url);
+
+        req.downloadHandler =
+            new DownloadHandlerBuffer();
+
+        AddSupabaseHeaders(req);
 
         yield return req.SendWebRequest();
 
         if (req.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError($" Leaderboard Error: {req.responseCode} {req.error} | {req.downloadHandler.text}");
+            Debug.LogError(
+                $"BestScore GET failed: " +
+                $"{req.responseCode} {req.error} | " +
+                $"{req.downloadHandler.text}"
+            );
+
             yield break;
         }
 
         string raw = req.downloadHandler.text;
 
-        string wrapped = "{\"rows\":" + raw + "}";
-        LeaderboardWrapper data = JsonUtility.FromJson<LeaderboardWrapper>(wrapped);
+        string wrapped =
+            "{\"rows\":" + raw + "}";
 
-        if (data == null || data.rows == null)
+        LeaderboardWrapper data =
+            JsonUtility.FromJson<LeaderboardWrapper>(
+                wrapped
+            );
+
+        int existingBest = 0;
+
+        if (
+            data != null &&
+            data.rows != null &&
+            data.rows.Length > 0
+        )
         {
-            Debug.LogWarning(" Leaderboard parse returned null. Showing empty leaderboard.");
-            if (leaderboardText != null)
-                leaderboardText.text = "Leaderboard\n\n(No entries)";
+            existingBest =
+                data.rows[0].best_score;
+        }
+
+
+        // Always synchronize Supabase value locally.
+        SetCurrentBest(
+            username,
+            existingBest
+        );
+
+        if (score <= existingBest)
+        {
+            Debug.Log(
+                $"Not uploading. " +
+                $"score={score} <= " +
+                $"existingBest={existingBest}"
+            );
+        }
+        else
+        {
+            Debug.Log(
+                $"Uploading new best. " +
+                $"score={score} > " +
+                $"existingBest={existingBest}"
+            );
+
+            yield return StartCoroutine(
+                PostScore(username, score)
+            );
+        }
+
+        yield return StartCoroutine(
+            GetLeaderboard()
+        );
+    }
+
+
+    private IEnumerator SyncCurrentPlayerBest(
+        string username
+    )
+    {
+        if (Application.internetReachability ==
+            NetworkReachability.NotReachable)
+        {
+            // If offline, display saved local value.
+            int localBest =
+                PlayerPrefs.GetInt(
+                    BestScoreKey,
+                    0
+                );
+
+            SetCurrentBest(
+                username,
+                localBest
+            );
+
             yield break;
         }
 
-        if (leaderboardText != null)
+        string url =
+            $"{supabaseUrl}/rest/v1/leaderboard" +
+            $"?select=best_score" +
+            $"&username=eq.{UnityWebRequest.EscapeURL(username)}" +
+            $"&limit=1";
 
+        using UnityWebRequest req =
+            UnityWebRequest.Get(url);
+
+        req.downloadHandler =
+            new DownloadHandlerBuffer();
+
+        AddSupabaseHeaders(req);
+
+        yield return req.SendWebRequest();
+
+        if (req.result !=
+            UnityWebRequest.Result.Success)
         {
-            StringBuilder sb = new StringBuilder();
+            Debug.LogError(
+                $"Player best GET failed: " +
+                $"{req.responseCode} {req.error} | " +
+                $"{req.downloadHandler.text}"
+            );
 
-            for (int i = 0; i < data.rows.Length; i++)
-            {
-                var e = data.rows[i];
-                string name = string.IsNullOrEmpty(e.username) ? "Player" : e.username;
+            yield break;
+        }
 
-                sb.AppendLine($"{(i + 1).ToString().PadLeft(2)}  {name.PadRight(12)}  {e.best_score.ToString().PadLeft(3)}");
-            }
+        string raw =
+            req.downloadHandler.text;
 
-            leaderboardText.text = sb.ToString();
+        string wrapped =
+            "{\"rows\":" + raw + "}";
+
+        LeaderboardWrapper data =
+            JsonUtility.FromJson<LeaderboardWrapper>(
+                wrapped
+            );
+
+        int bestScore = 0;
+
+        if (
+            data != null &&
+            data.rows != null &&
+            data.rows.Length > 0
+        )
+        {
+            bestScore =
+                data.rows[0].best_score;
+        }
+
+        SetCurrentBest(
+            username,
+            bestScore
+        );
+
+        Debug.Log(
+            $"Synced player: " +
+            $"{username}, best={bestScore}"
+        );
+    }
+
+    private IEnumerator PostScore(
+        string username,
+        int score
+    )
+    {
+        if (Application.internetReachability ==
+            NetworkReachability.NotReachable)
+        {
+            Debug.LogError(
+                "No internet connection"
+            );
+
+            yield break;
+        }
+
+        string url =
+            $"{supabaseUrl}/rest/v1/leaderboard" +
+            "?on_conflict=username";
+
+        string escapedUsername =
+            username.Replace(
+                "\"",
+                "\\\""
+            );
+
+        string json =
+            $"{{\"username\":\"{escapedUsername}\"," +
+            $"\"best_score\":{score}}}";
+
+        using UnityWebRequest req =
+            new UnityWebRequest(
+                url,
+                "POST"
+            );
+
+        req.uploadHandler =
+            new UploadHandlerRaw(
+                Encoding.UTF8.GetBytes(json)
+            );
+
+        req.downloadHandler =
+            new DownloadHandlerBuffer();
+
+        AddSupabaseHeaders(req);
+
+        req.SetRequestHeader(
+            "Content-Type",
+            "application/json"
+        );
+
+        req.SetRequestHeader(
+            "Prefer",
+            "resolution=merge-duplicates," +
+            "return=representation"
+        );
+
+        yield return req.SendWebRequest();
+
+        if (req.result ==
+            UnityWebRequest.Result.Success)
+        {
+            Debug.Log(
+                "Score submitted: " +
+                req.downloadHandler.text
+            );
+
+            // Update local/UI immediately after successful upload.
+            SetCurrentBest(
+                username,
+                score
+            );
+        }
+        else
+        {
+            Debug.LogError(
+                $"Submit Error: " +
+                $"{req.responseCode} {req.error} | " +
+                $"{req.downloadHandler.text}"
+            );
         }
     }
-        
+
+    public void LoadLeaderboard()
+    {
+        StartCoroutine(GetLeaderboard());
+    }
+
+    private IEnumerator GetLeaderboard()
+    {
+        if (Application.internetReachability ==
+            NetworkReachability.NotReachable)
+        {
+            Debug.LogError(
+                "No internet connection"
+            );
+
+            yield break;
+        }
+
+        string url =
+            $"{supabaseUrl}/rest/v1/leaderboard" +
+            "?select=username,best_score" +
+            "&order=best_score.desc" +
+            "&limit=10";
+
+        using UnityWebRequest req =
+            UnityWebRequest.Get(url);
+
+        req.downloadHandler =
+            new DownloadHandlerBuffer();
+
+        AddSupabaseHeaders(req);
+
+        yield return req.SendWebRequest();
+
+        if (req.result !=
+            UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(
+                $"Leaderboard Error: " +
+                $"{req.responseCode} {req.error} | " +
+                $"{req.downloadHandler.text}"
+            );
+
+            yield break;
+        }
+
+        string raw =
+            req.downloadHandler.text;
+
+        string wrapped =
+            "{\"rows\":" + raw + "}";
+
+        LeaderboardWrapper data =
+            JsonUtility.FromJson<LeaderboardWrapper>(
+                wrapped
+            );
+
+        if (
+            data == null ||
+            data.rows == null
+        )
+        {
+            if (leaderboardText != null)
+            {
+                leaderboardText.text =
+                    "No entries";
+            }
+
+            yield break;
+        }
+
+        if (leaderboardText == null)
+        {
+            yield break;
+        }
+
+        StringBuilder sb =
+            new StringBuilder();
+
+        for (
+            int i = 0;
+            i < data.rows.Length;
+            i++
+        )
+        {
+            LeaderboardEntry entry =
+                data.rows[i];
+
+            string playerName =
+                string.IsNullOrEmpty(
+                    entry.username
+                )
+                    ? "player"
+                    : entry.username;
+
+            string rankText =
+                (i + 1)
+                .ToString()
+                .PadLeft(2);
+
+            string usernameFormatted =
+                playerName.PadRight(12);
+
+            string scoreText =
+                entry.best_score
+                .ToString()
+                .PadLeft(3);
+
+            sb.AppendLine(
+                $"<color=#FF79C9>" +
+                $"{rankText}</color>  " +
+
+                $"<color=#FFF1D6>" +
+                $"{usernameFormatted}</color>  " +
+
+                $"<color=#FF79C9>" +
+                $"{scoreText}</color>"
+            );
+        }
+
+        leaderboardText.richText = true;
+        leaderboardText.text =
+            sb.ToString();
+    }
+
+    private void SetCurrentBest(
+        string username,
+        int bestScore
+    )
+    {
+        PlayerPrefs.SetString(
+            UsernameKey,
+            username
+        );
+
+        PlayerPrefs.SetInt(
+            BestScoreKey,
+            bestScore
+        );
+
+        PlayerPrefs.Save();
+
+        if (bestScoreText != null)
+        {
+            bestScoreText.text =
+                $"BEST {bestScore}";
+        }
+
+        if (usernameText != null)
+        {
+            usernameText.text =
+                username;
+        }
+    }
+
+    private string GetNormalizedUsername()
+    {
+        string username =
+            PlayerPrefs.GetString(
+                UsernameKey,
+                ""
+            );
+
+        username =
+            username
+                .Trim()
+                .ToLowerInvariant();
+
+        PlayerPrefs.SetString(
+            UsernameKey,
+            username
+        );
+
+        PlayerPrefs.Save();
+
+        return username;
+    }
+
+
+    private string ValidateUsernameRules(
+        string username
+    )
+    {
+        if (string.IsNullOrEmpty(username))
+        {
+            return "Username cannot be empty.";
+        }
+
+        if (
+            username.Length < 3 ||
+            username.Length > 20
+        )
+        {
+            return
+                "Username must be between " +
+                "3 and 20 characters.";
+        }
+
+        for (
+            int i = 0;
+            i < username.Length;
+            i++
+        )
+        {
+            char c =
+                username[i];
+
+            bool isLowerLetter =
+                c >= 'a' && c <= 'z';
+
+            bool isDigit =
+                c >= '0' && c <= '9';
+
+            bool isUnderscore =
+                c == '_';
+
+            if (
+                !isLowerLetter &&
+                !isDigit &&
+                !isUnderscore
+            )
+            {
+                return
+                    "Username can only contain " +
+                    "lowercase letters, numbers " +
+                    "or underscore.";
+            }
+        }
+
+        return null;
+    }
 }

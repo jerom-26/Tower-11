@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -116,10 +116,10 @@ TextureImporter:
       name: rocketpixel_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 1494
-        height: 1024
+        x: 526
+        y: 405
+        width: 622
+        height: 338
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 06159088224e52c4e8b272ce152a1af6
     internalID: 0
     vertices: []
     indices: 

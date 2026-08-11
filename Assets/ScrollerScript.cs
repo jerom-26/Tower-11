@@ -1,112 +1,242 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class ScrollerScript : MonoBehaviour
 {
     [Header("Speed")]
-    public float baseSpeed = 19f;
-    public float multiplier = 0.05f;
+    [SerializeField] private float baseSpeed = 19f;
+    [SerializeField] private float multiplier = 0.05f;
 
     [Header("Difficulty Scaling")]
-    public bool useDifficultyScaling = true;
-    public float maxSpeedMultiplier = 1.25f;
-    public int startScalingScore = 0;
+    [SerializeField] private bool useDifficultyScaling = true;
+    [SerializeField] private float maxSpeedMultiplier = 1.25f;
+    [SerializeField] private int startScalingScore;
 
-    [Header("BG Img")]
-    public Transform sky;
-    public Transform skyDuplicate;
+    [Header("Background Images")]
+    [SerializeField] private Transform sky;
+    [SerializeField] private Transform skyDuplicate;
 
     [Header("Loop Settings")]
-    public float buffer = 0.1f;
+    [SerializeField] private float overlap = 0.01f;
 
     private float tileWidth;
-    private Camera cam;
+    private Camera mainCamera;
     private gameLogicScript gameLogic;
 
+    private SpriteRenderer originalRenderer;
+    private SpriteRenderer duplicateRenderer;
 
-    void Awake()
+    private bool initialized;
+
+    private void Awake()
     {
-        cam = Camera.main;
+        mainCamera = Camera.main;
 
-        GameObject logicObj = GameObject.FindGameObjectWithTag("Logic");
-        if (logicObj != null)
-            gameLogic = logicObj.GetComponent<gameLogicScript>();
+        GameObject logicObject =
+            GameObject.FindGameObjectWithTag("Logic");
+
+        if (logicObject != null)
+        {
+            gameLogic =
+                logicObject.GetComponent<gameLogicScript>();
+        }
 
         if (sky == null || skyDuplicate == null)
         {
+            Debug.LogError(
+                $"{name}: Scroller is missing an original or duplicate tile.",
+                this
+            );
+
             enabled = false;
             return;
         }
 
-        var sr = sky.GetComponent<SpriteRenderer>();
-        if (sr == null)
+        originalRenderer = sky.GetComponent<SpriteRenderer>();
+        duplicateRenderer = skyDuplicate.GetComponent<SpriteRenderer>();
+
+        if (originalRenderer == null ||
+            duplicateRenderer == null)
         {
+            Debug.LogError(
+                $"{name}: Both scrolling tiles need SpriteRenderer components.",
+                this
+            );
+
             enabled = false;
             return;
         }
 
-        tileWidth = sr.bounds.size.x;
-        if (tileWidth <= 0.0001f)
+        tileWidth = originalRenderer.bounds.size.x;
+
+        if (tileWidth <= 0.001f)
         {
+            Debug.LogError(
+                $"{name}: Scroller tile width is invalid.",
+                this
+            );
+
             enabled = false;
-            return;
         }
     }
 
-    void Update()
+    private IEnumerator Start()
     {
-
-        float finalSpeed = baseSpeed;
-
-        // score-based extra speed
-        if (gameLogic != null)
-            finalSpeed += multiplier * gameLogic.playerScore;
-
-        // Difficulty-based scaling
-        if (useDifficultyScaling && gameLogic != null && gameLogic.playerScore >= startScalingScore)
+        if (!enabled)
         {
-            float d = gameLogic.GetDifficulty01(); // 0..1
-            float speedScale = Mathf.Lerp(1f, maxSpeedMultiplier, d);
+            yield break;
+        }
+
+        // Wait until WebGL/browser sizing has been applied.
+        yield return null;
+        yield return new WaitForEndOfFrame();
+
+        mainCamera = Camera.main;
+        tileWidth = originalRenderer.bounds.size.x;
+
+        AlignTilesToCamera();
+        CheckViewportCoverage();
+
+        initialized = true;
+    }
+
+    private void AlignTilesToCamera()
+    {
+        if (mainCamera == null)
+        {
+            return;
+        }
+
+        float cameraLeftEdge = GetCameraLeftX();
+
+        // Place the first tile so it begins slightly before
+        // the camera's left edge.
+        float firstTileX =
+            cameraLeftEdge +
+            tileWidth * 0.5f -
+            overlap * 0.5f;
+
+        sky.position = new Vector3(
+            firstTileX,
+            sky.position.y,
+            sky.position.z
+        );
+
+        // Ensure both copies have identical vertical placement.
+        skyDuplicate.position = new Vector3(
+            firstTileX + tileWidth - overlap,
+            sky.position.y,
+            sky.position.z
+        );
+    }
+
+    private void Update()
+    {
+        if (!initialized)
+        {
+            return;
+        }
+
+        if (gameLogic == null || !gameLogic.IsPlaying)
+        {
+            return;
+        }
+
+        float finalSpeed =
+            baseSpeed + multiplier * gameLogic.playerScore;
+
+        if (useDifficultyScaling &&
+            gameLogic.playerScore >= startScalingScore)
+        {
+            float difficulty =
+                gameLogic.GetDifficulty01();
+
+            float speedScale = Mathf.Lerp(
+                1f,
+                maxSpeedMultiplier,
+                difficulty
+            );
+
             finalSpeed *= speedScale;
         }
 
-        Vector3 delta = Vector3.left * finalSpeed * Time.deltaTime;
+        Vector3 movement =
+            Vector3.left * finalSpeed * Time.deltaTime;
 
-        sky.position += delta;
-        skyDuplicate.position += delta;
+        sky.position += movement;
+        skyDuplicate.position += movement;
 
-        float camLeftX = GetCameraLeftX();
+        float cameraLeftEdge = GetCameraLeftX();
 
-        if (GetTileRightEdge(sky) < camLeftX - buffer)
+        if (GetTileRightEdge(sky) <= cameraLeftEdge)
         {
-            sky.position = new Vector3(skyDuplicate.position.x + tileWidth, sky.position.y, sky.position.z);
+            MoveAfter(sky, skyDuplicate);
         }
 
-        if (GetTileRightEdge(skyDuplicate) < camLeftX - buffer)
+        if (GetTileRightEdge(skyDuplicate) <= cameraLeftEdge)
         {
-            skyDuplicate.position = new Vector3(sky.position.x + tileWidth, skyDuplicate.position.y, skyDuplicate.position.z);
-        }
-    }
-
-    float GetCameraLeftX()
-    {
-        if (cam == null) cam = Camera.main;
-        return cam.transform.position.x - (cam.orthographicSize * cam.aspect);
-    }
-
-    float GetTileRightEdge(Transform t)
-    {
-        return t.position.x + tileWidth * 0.5f;
-    }
-
-    void LoopIfNeeded(Transform a, Transform b)
-    {
-        if (a.position.x <= b.position.x - tileWidth + buffer)
-        {
-            a.position = new Vector3(b.position.x + tileWidth - buffer, a.position.y, a.position.z);
+            MoveAfter(skyDuplicate, sky);
         }
     }
 
+    private void MoveAfter(
+        Transform tileToMove,
+        Transform otherTile
+    )
+    {
+        tileToMove.position = new Vector3(
+            otherTile.position.x + tileWidth - overlap,
+            otherTile.position.y,
+            tileToMove.position.z
+        );
+    }
+
+    private float GetCameraLeftX()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+
+        if (mainCamera == null)
+        {
+            return 0f;
+        }
+
+        return mainCamera.transform.position.x -
+               mainCamera.orthographicSize *
+               mainCamera.aspect;
+    }
+
+    private float GetTileRightEdge(Transform tile)
+    {
+        return tile.position.x + tileWidth * 0.5f;
+    }
+
+    private void CheckViewportCoverage()
+    {
+        if (mainCamera == null)
+        {
+            return;
+        }
+
+        float cameraWidth =
+            mainCamera.orthographicSize *
+            mainCamera.aspect *
+            2f;
+
+        float combinedTileWidth =
+            tileWidth * 2f - overlap;
+
+        if (combinedTileWidth < cameraWidth)
+        {
+            Debug.LogWarning(
+                $"{name}: Two tiles are too narrow. " +
+                $"Coverage={combinedTileWidth:F2}, " +
+                $"Camera={cameraWidth:F2}. " +
+                "Use a wider sprite or three tiles.",
+                this
+            );
+        }
+    }
 }

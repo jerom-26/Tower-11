@@ -2,55 +2,71 @@ using UnityEngine;
 
 public class towerExplosionHandler : MonoBehaviour
 {
-    public gameLogicScript gameLogic;
-
     private ObjectPool explosionPool;
     private PooledObject pooledObject;
 
-    void Awake()
+    private void Awake()
     {
         pooledObject = GetComponent<PooledObject>();
     }
 
-    void Start()
+    private void Start()
     {
-        gameLogic = GameObject.FindGameObjectWithTag("Logic")
-            .GetComponent<gameLogicScript>();
+        GameObject explosionPoolObject =
+            GameObject.Find("ExplosionPool");
 
-        explosionPool = GameObject.Find("ExplosionPool")
-            .GetComponent<ObjectPool>();
+        if (explosionPoolObject != null)
+        {
+            explosionPool =
+                explosionPoolObject.GetComponent<ObjectPool>();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player")) return;
+        AirplaneScript airplane =
+            collision.gameObject.GetComponentInParent<AirplaneScript>();
 
+        if (airplane == null)
+        {
+            return;
+        }
+
+        // Tower explosion.
         SpawnExplosion();
 
-        StopTowerSpawn();
+        airplane.KillPlane();
 
-        if (gameLogic != null)
-            gameLogic.gameOverScreen();
-
+        // Return the tower to its pool.
         if (pooledObject != null)
+        {
             pooledObject.ReturnToPool();
+        }
     }
 
-    void SpawnExplosion()
+    private void SpawnExplosion()
     {
-        if (explosionPool == null) return;
+        if (explosionPool == null)
+        {
+            return;
+        }
 
-        var exp = explosionPool.Get(transform.position, Quaternion.identity);
-        if (exp == null) return;
+        GameObject explosion = explosionPool.Get(
+            transform.position,
+            Quaternion.identity
+        );
 
-        var pooled = exp.GetComponent<PooledObject>();
-        if (pooled != null) pooled.SetPool(explosionPool);
-    }
+        if (explosion == null)
+        {
+            return;
+        }
 
-    void StopTowerSpawn()
-    {
-        var spawner = FindAnyObjectByType<towerSpawnScript>();
-        if (spawner != null)
-            spawner.collisionSpawnStop = false;
+        PooledObject pooledExplosion =
+            explosion.GetComponent<PooledObject>();
+
+        if (pooledExplosion != null)
+        {
+            pooledExplosion.SetPool(explosionPool);
+        }
     }
 }
