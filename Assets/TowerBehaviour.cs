@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
@@ -13,18 +11,23 @@ public class TowerBehaviour : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private gameLogicScript gameLogic;
+    [SerializeField] private Transform airplane;
 
     private SpriteRenderer spriteRenderer;
-
     private PooledObject pooledObject;
     private Rigidbody2D rb;
+
     private Vector3 originalScale;
+
+
+    private bool scoreAwarded = false;
 
     private void Awake()
     {
         pooledObject = GetComponent<PooledObject>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         originalScale = transform.localScale;
 
         if (gameLogic == null)
@@ -39,32 +42,42 @@ public class TowerBehaviour : MonoBehaviour
             }
         }
 
+        if (airplane == null)
+        {
+            AirplaneScript plane =
+                FindFirstObjectByType<AirplaneScript>();
+
+            if (plane != null)
+            {
+                airplane = plane.transform;
+            }
+        }
     }
 
     public void OnSpawned()
     {
-        // Reset physics state 
+
+        scoreAwarded = false;
+
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
 
-        float heightMultiplier = Random.Range(minHeight, maxHeight);
+        float heightMultiplier =
+            Random.Range(minHeight, maxHeight);
 
-
-        transform.localScale = new Vector3(
-            originalScale.x,
-            originalScale.y * heightMultiplier,
-            originalScale.z
-        );
-        
+        transform.localScale =
+            new Vector3(
+                originalScale.x,
+                originalScale.y * heightMultiplier,
+                originalScale.z
+            );
     }
 
     private void Update()
     {
-        // Stops existing towers before gameplay, while paused,
-        // and after game over.
         if (gameLogic == null || !gameLogic.IsPlaying)
         {
             if (rb != null)
@@ -76,10 +89,30 @@ public class TowerBehaviour : MonoBehaviour
             return;
         }
 
-        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+        float previousX = transform.position.x;
 
-        // Off-screen check and return to pool (NOT Destroy)
-        if (transform.position.x < -15f) 
+        // Move tower.
+        transform.position +=
+            Vector3.left * moveSpeed * Time.deltaTime;
+
+        float currentX = transform.position.x;
+
+
+        if (!scoreAwarded && airplane != null)
+        {
+            float planeX = airplane.position.x;
+
+            if (previousX >= planeX &&
+                currentX < planeX)
+            {
+                scoreAwarded = true;
+
+                gameLogic.gameScore();
+            }
+        }
+
+   
+        if (transform.position.x < -15f)
         {
             if (pooledObject != null)
             {
@@ -87,5 +120,4 @@ public class TowerBehaviour : MonoBehaviour
             }
         }
     }
-
 }

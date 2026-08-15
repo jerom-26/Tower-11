@@ -32,6 +32,10 @@ public class AirplaneScript : MonoBehaviour
     private bool gameplayEnabled = false;
     private bool flapRequested = false;
 
+    [SerializeField] private AudioSource flapAudioSource;
+    [SerializeField] private AudioClip flapSound;
+    [SerializeField, Range(0f, 1f)] private float flapVolume = 0.2f;
+
     private void Awake()
     {
         if (myRigidBody == null)
@@ -133,10 +137,13 @@ public class AirplaneScript : MonoBehaviour
     private void Flap()
     {
         Vector2 velocity = myRigidBody.linearVelocity;
-
         velocity.y = planeVelocity;
-
         myRigidBody.linearVelocity = velocity;
+
+        if (flapAudioSource != null && flapSound != null)
+        {
+            flapAudioSource.PlayOneShot(flapSound, flapVolume);
+        }
     }
 
     private void ClampToBounds()

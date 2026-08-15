@@ -9812,6 +9812,7 @@ MonoBehaviour:
   scoreOfGame: {fileID: 0}
   rocketSound: {fileID: 6354791167472381954}
   explosionEffect: {fileID: 100000, guid: cf334c2fa68e8414087d035e6c17bec3, type: 3}
+  collisionSound: {fileID: 8300000, guid: ab4834e1fc31c3c449fd17029d665607, type: 3}
   rocketCollisionMove: 1
   homingDuration: 1.5
   turnSpeed: 90
@@ -9854,7 +9855,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 14.94, y: 10.24}
+    oldSize: {x: 6.22, y: 3.38}
     newSize: {x: 20, y: 20}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
